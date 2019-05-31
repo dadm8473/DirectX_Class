@@ -1,0 +1,25 @@
+#pragma once
+
+#include <list>
+using std::list;
+
+#include <vector>
+using std::vector;
+
+#include "CTexture.h"
+#include "CMatrix.h"
+
+#include "CAssetManager.h"
+
+#include "CMap.h"
+
+#include "CBullet.h"
+
+#include "CBoss.h"
+
+#include "CEnemy.h"
+#include "CPlayer.h"
+
+#include "CScene.h"
+
+#include "Game.h"
