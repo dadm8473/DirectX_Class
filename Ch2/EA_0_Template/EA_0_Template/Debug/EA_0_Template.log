@@ -1,0 +1,7 @@
+﻿  소스.cpp
+c:\users\myskd\source\repos\ea_0_template\ea_0_template\소스.cpp(28): warning C4305: '인수': 'double'에서 'T'(으)로 잘립니다.
+          with
+          [
+              T=float
+          ]
+  EA_0_Template.vcxproj -> C:\Users\myskd\source\repos\EA_0_Template\Debug\EA_0_Template.exe

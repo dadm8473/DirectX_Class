@@ -1,0 +1,11 @@
+﻿  BulletSpawner.cpp
+c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(26): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(31): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(37): warning C4456: 'temp' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(23): note: 'temp' 선언을 참조하십시오.
+c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(38): warning C4456: 'x' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(24): note: 'x' 선언을 참조하십시오.
+c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(39): warning C4456: 'y' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(25): note: 'y' 선언을 참조하십시오.
+c:\users\myskd\desktop\ch6\_6_1_ui\src\bulletspawner.cpp(40): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  TryWorld_2010.vcxproj -> C:\Users\myskd\Desktop\Ch6\_6_1_UI\Debug\TryWorld.exe

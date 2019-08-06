@@ -1,0 +1,5 @@
+﻿  InGameScene.cpp
+c:\users\jsb\desktop\ch4\_4_1_scene, game\src\ingamescene.cpp(96): warning C4473: 'swprintf_s': 서식 문자열에 대한 인수가 충분하게 전달되지 않았습니다.
+  c:\users\jsb\desktop\ch4\_4_1_scene, game\src\ingamescene.cpp(96): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 2개 필요하지만 1개가 제공되었습니다.
+  c:\users\jsb\desktop\ch4\_4_1_scene, game\src\ingamescene.cpp(96): note: 누락된 variadic 인수 2이(가) 서식 문자열 '%lf'에 필요합니다.
+LINK : fatal error LNK1168: C:\Users\JSB\Desktop\Ch4\_4_1_Scene, Game\Debug\TryWorld.exe을(를) 쓰기용으로 열 수 없습니다.

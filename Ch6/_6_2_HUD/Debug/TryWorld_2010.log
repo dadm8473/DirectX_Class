@@ -1,0 +1,3 @@
+﻿  HPBar.cpp
+c:\users\jsb\desktop\ch6\_6_2_hud\src\hpbar.cpp(18): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  TryWorld_2010.vcxproj -> C:\Users\JSB\Desktop\Ch6\_6_2_HUD\Debug\TryWorld.exe
