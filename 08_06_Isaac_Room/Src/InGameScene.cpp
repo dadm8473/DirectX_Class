@@ -54,18 +54,8 @@ int InGameScene::Start()
 	item = new CItem(2);
 	Roomtemp->SetItem(item, D3DXVECTOR2(100, 100));
 
-
-
-
-
-
-
-
-
-
-
-
-
+	Boss3* boss3 = new Boss3;
+	Roomtemp->SetEnemy(boss3, D3DXVECTOR2(0, 0));
 
 	Roomtemp = new Room;
 	Roomtemp->position = { 1024,0 };

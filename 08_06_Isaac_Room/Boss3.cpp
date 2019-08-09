@@ -23,15 +23,27 @@ void Boss3::Start()
 	renderer->SetIndex(2, 4, 1, false);		// Idle
 	renderer->SetIndex(3, 4, 4, true);		// Pattern
 	// 3 ÆäÀÌÁî
-	renderer->SetIndex(4, 8, 4, true);		// Transform
+	renderer->SetIndex(4, 8, 11, true);		// Transform
 	renderer->SetIndex(5, 12, 7, true);		// Idle
 	renderer->SetIndex(6, 19, 1, false);	// Pattern
+
+	phase = 1;
 	
 	fMoveSpeed = 100;
+	pAngle = 100;
+
+	pos_x = 0;
+	pos_y = 0;
+
+	moveTime = 0.0005f;
+	moveTimer = 0;
+
+	transTime = 2.2f;
+	transTimer = 0;
 
 	bDie = false;
-	maxHP = 2500;
-	hp = 2500;
+	maxHP = 1000;
+	hp = 1000;
 	bossHPBar = new HPBar;
 
 	bPattern = false;
@@ -40,7 +52,7 @@ void Boss3::Start()
 
 	scale = { 2,2 };
 
-	CreateCollider(CL_ENEMY, 30);
+	CreateCollider(CL_ENEMY, 20);
 	SetCollision(CL_PLAYER_BULLET);
 
 	vMoveVector = { -1, 1 };
@@ -48,6 +60,9 @@ void Boss3::Start()
 
 	colorTimer = 0;
 	colorTime = 0.2;
+
+	pos_x = 320 * cos(270 + pAngle * D3DX_PI / 180);
+	pos_y = 230 * sin(270 + pAngle * D3DX_PI / 180);
 }
 
 void Boss3::Update(float deltaTime)
@@ -55,12 +70,21 @@ void Boss3::Update(float deltaTime)
 	CGameObject::Update(deltaTime);
 	HPControl(deltaTime);
 	Timer += deltaTime;
-
+	
 	if (hp > 0)
 	{
-		Move(deltaTime);
+		if (phase == 4)
+		{
+			moveTimer += deltaTime;
+			if (moveTimer > moveTime)
+			{
+				Move(deltaTime);
+				moveTimer = 0;
+			}
+		}
 		PatternUse(deltaTime);
 		HitColorSet(deltaTime);
+		PhaseControl(deltaTime);
 	}
 	else if (!bDie)
 	{
@@ -82,7 +106,8 @@ void Boss3::Update(float deltaTime)
 void Boss3::OnCollision(CGameObject * CollisionObject)
 {
 	CollisionObject->bActive = false;
-	hp -= bullet_damage;
+	if(phase != 3)
+		hp -= bullet_damage;
 
 	if (hp < 0)
 	{
@@ -98,36 +123,59 @@ void Boss3::OnCollision(CGameObject * CollisionObject)
 
 void Boss3::Move(float deltaTime)
 {
-	D3DXVec2Normalize(&vMoveVector, &vMoveVector);
+	/*D3DXVec2Normalize(&vMoveVector, &vMoveVector);
 
 	prevPos = position;
-	position += vMoveVector * fMoveSpeed * deltaTime;
+	position += vMoveVector * fMoveSpeed * deltaTime;*/
 
-	if (position.x < g_OpenScene->limitrect.left + 50)
+	/*x_cos = (cos(pAngle) * 5);
+	y_sin = (sin(pAngle) * 5);
+
+	pos_x = x_cos - y_sin;
+	pos_y = x_cos + y_sin;
+
+	pAngle += 5;*/
+
+	if (transTimer > 0.4f)
 	{
-		prevPos = position;
-		vMoveVector.x = abs(vMoveVector.x);
+		pos_x = 320 * cos(270 + pAngle * D3DX_PI / 180);
+		pos_y = 230 * sin(270 + pAngle * D3DX_PI / 180);
+
+		pAngle += 1.5f;
+
+		position = D3DXVECTOR2(pos_x, pos_y + 30);
+
+		if (position.x < g_OpenScene->limitrect.left + 50)
+		{
+			prevPos = position;
+			vMoveVector.x = abs(vMoveVector.x);
+		}
+		else if (position.x > g_OpenScene->limitrect.right - 50)
+		{
+			prevPos = position;
+			vMoveVector.x = -abs(vMoveVector.x);
+		}
+		else if (position.y < g_OpenScene->limitrect.top + 50)
+		{
+			prevPos = position;
+			vMoveVector.y = abs(vMoveVector.y);
+		}
+		else if (position.y > g_OpenScene->limitrect.bottom - 50)
+		{
+			prevPos = position;
+			vMoveVector.y = -abs(vMoveVector.y);
+		}
 	}
-	else if (position.x > g_OpenScene->limitrect.right - 50)
+	else
 	{
-		prevPos = position;
-		vMoveVector.x = -abs(vMoveVector.x);
-	}
-	else if (position.y < g_OpenScene->limitrect.top + 50)
-	{
-		prevPos = position;
-		vMoveVector.y = abs(vMoveVector.y);
-	}
-	else if (position.y > g_OpenScene->limitrect.bottom - 50)
-	{
-		prevPos = position;
-		vMoveVector.y = -abs(vMoveVector.y);
+		D3DXVec2Lerp(&position, &position, &D3DXVECTOR2(pos_x, pos_y + 30), 0.1);
+		transTimer += deltaTime;
 	}
 }
 
 void Boss3::HPControl(float deltaTime)
 {
-	bossHPBar->position = position + D3DXVECTOR2(0, -100);
+	bossHPBar->position = position + D3DXVECTOR2(0, -50);
 	bossHPBar->ratio = hp / maxHP;
 
 	if (hp < maxHP)
@@ -136,6 +184,37 @@ void Boss3::HPControl(float deltaTime)
 	}
 	else
 		hp = maxHP;
+}
+
+void Boss3::PhaseControl(float deltaTime)
+{
+	if (phase == 1 && hp < maxHP * 0.7f)
+	{
+		renderer->SetAni(2);
+		phase = 2;
+	}
+	else if (phase == 2 && hp < maxHP * 0.4f)
+	{
+		renderer->SetAni(4);
+		phase = 3;
+		renderer->delay = 0.2f;
+	}
+	else if (phase == 3)
+	{
+		transTimer += deltaTime;
+		if (transTime < transTimer)
+		{
+			renderer->SetAni(5);
+			phase = 4;
+			renderer->delay = 0.07f;
+			transTimer = 0;
+		}
+
+		if (hp < maxHP)
+			hp += 500 * deltaTime;
+		else
+			hp = maxHP;
+	}
 }
 
 void Boss3::PatternUse(float deltaTime)
@@ -147,9 +226,7 @@ void Boss3::PatternUse(float deltaTime)
 		if (Timer > Time)
 		{
 			Time = 3;
-			renderer->SetAni(0);
 			Timer = 0;
-			fMoveSpeed = 300;
 
 			ChaseBall * temp1;
 			EnemyHall * temp2;
@@ -163,7 +240,6 @@ void Boss3::PatternUse(float deltaTime)
 				temp2 = new EnemyHall;
 				temp2->position = position;
 				break;
-
 			case 2:
 				for (int i = 0; i < 20; ++i)
 				{
@@ -192,17 +268,17 @@ void Boss3::PatternUse(float deltaTime)
 		switch (patternIndex)
 		{
 		case 0:
-			renderer->SetAni(1);
+			//renderer->SetAni(1);
 			Time = 0;
 			break;
 
 		case 1:
-			renderer->SetAni(2);
+			//renderer->SetAni(2);
 			Time = 0;
 			break;
 
 		case 2:
-			renderer->SetAni(1);
+			//renderer->SetAni(1);
 			Time = 0;
 			break;
 
