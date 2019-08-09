@@ -181,7 +181,7 @@ void Boss3::Move(float deltaTime)
 
 	pAngle += 5;*/
 
-	if (transTimer > 0.4f)
+	if (transTimer > 0.4f && !pattern1_Use && !pattern2_Use && !pattern3_Use)
 	{
 		pos_x = 350 * cos(270 + pAngle * D3DX_PI / 180);
 		pos_y = 230 * sin(270 + pAngle * D3DX_PI / 180);
