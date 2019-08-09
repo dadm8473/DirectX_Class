@@ -1,6 +1,12 @@
 #include "DXUT.h"
 #include "EnemyBullet.h"
 
+EnemyBullet::EnemyBullet(bool isMove)
+	: isMove(isMove)
+{
+
+}
+
 void EnemyBullet::Start()
 {
 	type = ENEMY_BULLET;
@@ -19,12 +25,24 @@ void EnemyBullet::Start()
 
 	scale = { 2, 2 };
 
+	timer = 0;
+
 	CreateCollider(CL_ENEMY_BULLET, 5);
 }
 
 void EnemyBullet::Update(float deltaTime)
 {
 	CGameObject::Update(deltaTime);
+
+	if (isMove)
+	{
+		timer += deltaTime;
+		D3DXMATRIX mtemp;
+		D3DXMatrixRotationZ(&mtemp, D3DXToRadian(2));
+		D3DXVec2TransformNormal(&vMoveVector, &vMoveVector, &mtemp);
+		if (timer > 5)
+			bActive = false;
+	}
 
 	D3DXVECTOR2 vMove;
 	D3DXVec2Normalize(&vMove, &vMoveVector);

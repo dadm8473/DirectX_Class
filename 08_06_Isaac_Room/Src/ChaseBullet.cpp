@@ -13,14 +13,19 @@ void ChaseBullet::Start()
 	vMoveVector = g_pPlayer->position - position;
 	D3DXVec2Normalize(&vMoveVector, &vMoveVector);
 
-	scale = { 1, 1 };
+	scale = { 2, 2 };
 
 	CreateCollider(CL_ENEMY_BULLET, 5);
+	timer = 0;
 }
 
 void ChaseBullet::Update(float deltaTime)
 {
 	CGameObject::Update(deltaTime);
+	timer += deltaTime;
+
+	if (timer > 3)
+		bActive = false;
 
 	D3DXVECTOR2 vMove = g_pPlayer->position - position;
 	D3DXVec2Normalize(&vMove, &vMove);

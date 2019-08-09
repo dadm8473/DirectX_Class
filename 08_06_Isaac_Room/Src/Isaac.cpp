@@ -22,8 +22,8 @@ void Isaac::Start()
 
 	fMoveSpeed = 400;
 
-	maxHP = 100;
-	hp = 100;
+	maxHP = 1000;
+	hp = 1000;
 	playerHPbar = new HPBar;
 
 	maxMP = 50;

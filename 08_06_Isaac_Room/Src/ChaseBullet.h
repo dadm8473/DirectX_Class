@@ -10,5 +10,7 @@ public:
 	D3DXVECTOR2 InitPos;
 	D3DXVECTOR2 vMoveVector;
 	float fMoveSpeed;
+
+	float timer;
 };
 

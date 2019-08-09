@@ -5,6 +5,7 @@
 //--------------------------------------------------------------------------------------
 #include "DXUT.h"
 #include "resource.h"
+#include <time.h>
 
 Isaac * g_pPlayer;
 Game g_Game;
@@ -77,6 +78,7 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 	//for (int i = 0; i < 50; i++)
 	//	g_pEnemyBullets[i].Update(fElapsedTime);
 
+	srand((unsigned int)time(NULL));
 	g_Game.Update(fElapsedTime);
 }
 

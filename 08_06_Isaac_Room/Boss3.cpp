@@ -47,7 +47,7 @@ void Boss3::Start()
 	bossHPBar = new HPBar;
 
 	bPattern = false;
-	Timer = 1;
+	Timer = 0;
 	Time = 1;
 
 	scale = { 2,2 };
@@ -63,11 +63,35 @@ void Boss3::Start()
 
 	pos_x = 320 * cos(270 + pAngle * D3DX_PI / 180);
 	pos_y = 230 * sin(270 + pAngle * D3DX_PI / 180);
+
+	pattern1_Use = false;
+	pat1_Timer = 0.5f;
+	pat1_Time = 0.5f;
+	pat1_Counter = 0;
+
+	pattern2_Use = false;
+	sum = 0;
+	pat2_Timer = 0.5f;
+	pat2_Time = 0.5f;
+	pat2_Counter = 0;
+
+	pattern3_Use = false;
+	pat3_Timer = 0.5f;
+	pat3_Time = 0.5f;
+	pat3_Counter = 0;
+
+	idleTimer = 0;
+	idleTime = 1;
+	idle_Attack_Time = 0.07f;
+	idle_Attack_Timer = 0.07f;
+	idle_Attack_Count = 0;
+	isHited = false;
 }
 
 void Boss3::Update(float deltaTime)
 {
 	CGameObject::Update(deltaTime);
+
 	HPControl(deltaTime);
 	Timer += deltaTime;
 	
@@ -82,7 +106,25 @@ void Boss3::Update(float deltaTime)
 				moveTimer = 0;
 			}
 		}
-		PatternUse(deltaTime);
+
+		if(phase != 3)
+			PatternUse(deltaTime);
+
+		if ((phase == 1 || phase == 2) && isHited && isCool)
+			IdlePattern(deltaTime);
+		else
+		{
+			if (!isCool)
+			{
+				idleTimer += deltaTime;
+				if (idleTimer > idleTime)
+				{
+					isCool = true;
+					idleTimer = 0;
+				}
+			}
+		}
+
 		HitColorSet(deltaTime);
 		PhaseControl(deltaTime);
 	}
@@ -106,8 +148,11 @@ void Boss3::Update(float deltaTime)
 void Boss3::OnCollision(CGameObject * CollisionObject)
 {
 	CollisionObject->bActive = false;
+
 	if(phase != 3)
 		hp -= bullet_damage;
+	
+	isHited = true;
 
 	if (hp < 0)
 	{
@@ -138,7 +183,7 @@ void Boss3::Move(float deltaTime)
 
 	if (transTimer > 0.4f)
 	{
-		pos_x = 320 * cos(270 + pAngle * D3DX_PI / 180);
+		pos_x = 350 * cos(270 + pAngle * D3DX_PI / 180);
 		pos_y = 230 * sin(270 + pAngle * D3DX_PI / 180);
 
 		pAngle += 1.5f;
@@ -219,41 +264,28 @@ void Boss3::PhaseControl(float deltaTime)
 
 void Boss3::PatternUse(float deltaTime)
 {
-	if (!renderer->bAnimation)
+	if (bPattern)
 	{
 		bPattern = false;
 
 		if (Timer > Time)
 		{
-			Time = 3;
+			Time = 5;
 			Timer = 0;
 
-			ChaseBall * temp1;
-			EnemyHall * temp2;
 			switch (patternIndex)
 			{
 			case 0:
-				temp1 = new ChaseBall;
-				temp1->position = position;
+				pattern1_Use = true;
 				break;
 			case 1:
-				temp2 = new EnemyHall;
-				temp2->position = position;
+				pattern2_Use = true;
 				break;
 			case 2:
-				for (int i = 0; i < 20; ++i)
-				{
-					EnemyBullet * temp = new EnemyBullet;
-					temp->position = position;
-					temp->fMoveSpeed *= 1.2f - rand() % 41 * 0.01f; // 120 - 0 ~ 40 = 80 ~ 120
-					temp->vMoveVector = g_pPlayer->position - position;
-
-					int a = rand() % 31;
-
-					D3DXMATRIX mtemp;
-					D3DXMatrixRotationZ(&mtemp, D3DXToRadian(15 - a));
-					D3DXVec2TransformNormal(&temp->vMoveVector, &temp->vMoveVector, &mtemp);
-				}
+				pattern3_Use = true;
+				break;
+			case 3:
+				pattern1_Use = true;
 				break;
 			}
 		}
@@ -264,29 +296,177 @@ void Boss3::PatternUse(float deltaTime)
 		Timer = 0;
 		bPattern = true;
 
-		patternIndex = rand() % 3;
-		switch (patternIndex)
+		patternIndex = rand() % phase;
+
+		switch (phase)
 		{
-		case 0:
-			//renderer->SetAni(1);
-			Time = 0;
-			break;
-
 		case 1:
-			//renderer->SetAni(2);
+			renderer->SetAni(1);
 			Time = 0;
 			break;
-
 		case 2:
-			//renderer->SetAni(1);
+			renderer->SetAni(3);
 			Time = 0;
 			break;
-
-		default:
+		case 3:
+			renderer->SetAni(5);
+			Time = 0;
+			break;
+		case 4:
+			renderer->SetAni(6);
+			Time = 0;
 			break;
 		}
 	}
 
+	if(pattern1_Use)
+		Pattern1(deltaTime);
+
+	if(pattern2_Use)
+		Pattern2(deltaTime);
+
+	if (pattern3_Use)
+		Pattern3(deltaTime);
+}
+
+void Boss3::Pattern1(float deltaTime)
+{
+	pat1_Timer += deltaTime;
+	if (pat1_Timer > pat1_Time)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			EnemyBullet * temp = new EnemyBullet;
+			temp->position = position;
+			temp->vMoveVector = g_pPlayer->position - position;
+
+			D3DXMATRIX mtemp;
+			D3DXMatrixRotationZ(&mtemp, D3DXToRadian(12 - 6 * i));
+			D3DXVec2TransformNormal(&temp->vMoveVector, &temp->vMoveVector, &mtemp);
+		}
+
+		pat1_Counter++;
+		pat1_Timer = 0;
+		if (pat1_Counter >= 4)
+		{
+			pat1_Timer = 0.5f;
+			pat1_Counter = 0;
+			SetIdle();
+			pattern1_Use = false;
+		}
+	}
+}
+
+
+void Boss3::Pattern2(float deltaTime)
+{
+	pat2_Timer += deltaTime;
+	if (pat2_Timer > pat2_Time)
+	{
+		for (int i = 0; i <= 15; ++i)
+		{
+			EnemyBullet * temp = new EnemyBullet;
+			temp->position = position;
+			temp->vMoveVector = g_pPlayer->position - position;
+
+			D3DXMATRIX mtemp;
+			D3DXMatrixRotationZ(&mtemp, D3DXToRadian(i * 24));
+			D3DXVec2TransformNormal(&temp->vMoveVector, &temp->vMoveVector, &mtemp);
+			sum++;
+		}
+
+		pat2_Counter++;
+		pat2_Timer = 0;
+		if (pat2_Counter >= 4)
+		{
+			pat2_Timer = 0.5f;
+			pat2_Counter = 0;
+			SetIdle();
+			pattern2_Use = false;
+		}
+	}
+}
+
+void Boss3::Pattern3(float deltaTime)
+{
+	pat3_Timer += deltaTime;
+	if (pat3_Timer > pat3_Time)
+	{
+		for (int i = 0; i <= 12; ++i)
+		{
+			EnemyBullet * temp = new EnemyBullet(true);
+			temp->position = position;
+			temp->vMoveVector = g_pPlayer->position - position;
+
+			D3DXMATRIX mtemp;
+			D3DXMatrixRotationZ(&mtemp, D3DXToRadian(i * 30));
+			D3DXVec2TransformNormal(&temp->vMoveVector, &temp->vMoveVector, &mtemp);
+			sum++;
+		}
+
+		pat3_Counter++;
+		pat3_Timer = 0;
+		if (pat3_Counter >= 4)
+		{
+			pat3_Timer = 0.5f;
+			pat3_Counter = 0;
+			SetIdle();
+			pattern3_Use = false;
+		}
+	}
+}
+
+void Boss3::IdlePattern(float deltaTime)
+{
+	idle_Attack_Timer += deltaTime;
+	if (idle_Attack_Timer > idle_Attack_Time && isCool)
+	{
+		switch (phase)
+		{
+		case 1:
+		{
+			EnemyBullet * temp = new EnemyBullet;
+			temp->position = position;
+			temp->vMoveVector = g_pPlayer->position - position;
+		}
+		break;
+		case 2:
+		{
+			ChaseBullet * temp = new ChaseBullet;
+			temp->position = position;
+			temp->vMoveVector = g_pPlayer->position - position;
+		}
+		break;
+		}
+
+		idle_Attack_Timer = 0;
+		idle_Attack_Count++;
+
+		if (idle_Attack_Count >= 3)
+		{
+			isCool = false;
+			isHited = false;
+			idleTimer = 0;
+			idle_Attack_Timer = 0.07f;
+			idle_Attack_Count = 0;
+		}
+	}
+}
+
+void Boss3::SetIdle()
+{
+	switch (phase)
+	{
+	case 1:
+		renderer->SetAni(0);
+		break;
+	case 2:
+		renderer->SetAni(2);
+		break;
+	case 4:
+		renderer->SetAni(5);
+		break;
+	}
 }
 
 void Boss3::HitColorSet(float deltaTime)
