@@ -385,9 +385,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BackButton.h" />
     <ClInclude Include="Boss3.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="Door.h" />
+    <ClInclude Include="Ending.h" />
+    <ClInclude Include="EndingScene.h" />
+    <ClInclude Include="MousePoint.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Src\Boss2.h" />
     <ClInclude Include="Src\ChaseBall.h" />
@@ -408,6 +412,7 @@
     <ClInclude Include="Src\Scene.h" />
     <ClInclude Include="Src\Title.h" />
     <ClInclude Include="Src\TitleScene.h" />
+    <ClInclude Include="StartButton.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="Src\CInput.h" />
     <ClInclude Include="Src\CollisionManager.h" />
@@ -421,9 +426,13 @@
     <ClInclude Include="DXUT\Core\DXUT.h" />
     <ClInclude Include="DXUT\Core\DXUTenum.h" />
     <ClInclude Include="DXUT\Core\DXUTmisc.h" />
+    <ClCompile Include="BackButton.cpp" />
     <ClCompile Include="Boss3.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Ending.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
+    <ClCompile Include="MousePoint.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Src\Boss2.cpp" />
     <ClCompile Include="Src\ChaseBall.cpp" />
@@ -471,6 +480,7 @@
     <ClCompile Include="Src\Scene.cpp" />
     <ClCompile Include="Src\Title.cpp" />
     <ClCompile Include="Src\TitleScene.cpp" />
+    <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="TryWorld.cpp" />
   </ItemGroup>
   <ItemGroup>

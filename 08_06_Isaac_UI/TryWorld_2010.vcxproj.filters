@@ -42,6 +42,9 @@
     <Filter Include="GameObject\Item">
       <UniqueIdentifier>{2bae9ef8-5f16-419e-b688-72c8c75df43f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{ad98ac88-2db3-4d4f-9f83-8322e5fe1550}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -189,6 +192,21 @@
     <ClCompile Include="Boss3.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="BackButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingScene.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MousePoint.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\CSpriteRenderer.h">
@@ -276,6 +294,21 @@
     </ClInclude>
     <ClInclude Include="Boss3.h">
       <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BackButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingScene.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MousePoint.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButton.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

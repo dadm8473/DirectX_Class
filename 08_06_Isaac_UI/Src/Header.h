@@ -44,6 +44,8 @@ extern CInput g_Input;
 #include "CSpriteRenderer.h"
 #include "CGameObject.h"
 
+#include "MousePoint.h"
+
 #include "ResourceManager.h"
 #include "ObjectManager.h"
 #include "CollisionManager.h"
@@ -55,8 +57,11 @@ extern Game g_Game;
 extern Scene * g_OpenScene;
 #include "TitleScene.h"
 #include "InGameScene.h"
+#include "EndingScene.h"
 
+#include "StartButton.h"
 #include "Title.h"
+#include "Ending.h"
 
 #include "HPBar.h"
 #include "CPlayer.h"
@@ -74,11 +79,10 @@ extern Isaac * g_pPlayer;
 
 #include "ChaseBall.h"
 #include "EnemyHall.h"
-#include "Boss2.h"
 
 #include "ChaseEnemy.h"
 #include "Boss1.h"
-
+#include "Boss2.h"
 #include "Boss3.h"
 
 #include "Door.h"
