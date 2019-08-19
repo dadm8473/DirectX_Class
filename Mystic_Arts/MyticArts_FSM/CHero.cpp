@@ -7,6 +7,7 @@ HeroJump * HeroJump::instance = new HeroJump;
 HeroFall * HeroFall::instance = new HeroFall;
 HeroInAir * HeroInAir::instance = new HeroInAir;
 HeroAttack * HeroAttack::instance = new HeroAttack;
+HeroSkyAttack * HeroSkyAttack::instance = new HeroSkyAttack;
 HeroSpecailAttack * HeroSpecailAttack::instance = new HeroSpecailAttack;
 
 CHero::CHero()
@@ -21,7 +22,7 @@ CHero::~CHero()
 void CHero::Start()
 {
 	if (!renderer)
-		renderer = new CSpriteRenderer(L"Hero", L"Assets/Images/Player/Hero_", L"png", true, 20, 81, 0.06);
+		renderer = new CSpriteRenderer(L"Hero", L"Assets/Images/Player/Hero_", L"png", true, 100, 81, 0.06);
 
 	renderer->SetIndex(0, 0, 7, true);			// 0 :  0,4 - idle
 	renderer->SetIndex(1, 8, 12, false);		// 1 :  5,9 - move start
@@ -36,6 +37,11 @@ void CHero::Start()
 	renderer->SetIndex(10, 52, 57, false);		//10 : 52,57 - attack 4
 	renderer->SetIndex(11, 58, 62, false);		//11 : 18,62 - attack 5
 	renderer->SetIndex(12, 63, 66, false);		//12 : 63,66 - attack 6
+
+	renderer->SetIndex(20, 26, 28, false);		//20 : 26,28 - Jump attack 1
+	renderer->SetIndex(21, 29, 32, false);		//21 : 29,32 - Jump attack 2
+	renderer->SetIndex(22, 33, 36, false);		//22 : 33,36 - Jump attack 3
+
 
 	HeroIdle::instance->EnterState(this);
 

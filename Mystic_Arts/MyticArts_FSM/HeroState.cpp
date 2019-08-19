@@ -161,6 +161,7 @@ void HeroFall::UpdateState(CHero * pObject, float deltaTime)
 	{
 		HeroIdle::instance->EnterState(pObject);
 		HeroJump::instance->isDoubleJump = false;
+		HeroInAir::instance->isSkyAttack = false;
 		return;
 	}
 	if (pObject->velocity.y < -300 && jump2fall)
@@ -185,7 +186,6 @@ void HeroFall::ExitState(CHero * pObject)
 
 void HeroInAir::EnterState(CHero * pObject)
 {
-	
 }
 
 void HeroInAir::UpdateState(CHero * pObject, float deltaTime)
@@ -218,9 +218,9 @@ void HeroInAir::UpdateState(CHero * pObject, float deltaTime)
 		return;
 	}
 
-	if (g_Game.Input.KeyDown('A'))
+	if (g_Game.Input.KeyDown('A') && !isSkyAttack)
 	{
-		pObject->renderer->SetAni(9);
+		HeroSkyAttack::instance->EnterState(pObject);
 	}
 }
 
@@ -248,7 +248,6 @@ void HeroAttack::EnterState(CHero * pObject)
 	combo = 0;
 	comboInput = 0;
 	timer = 0;
-	special_Up_Attack = false;
 }
 
 void HeroAttack::UpdateState(CHero * pObject, float deltaTime)
@@ -258,10 +257,6 @@ void HeroAttack::UpdateState(CHero * pObject, float deltaTime)
 	{
 		comboInput++;
 	}
-
-	if (g_Game.Input.KeyDown('A') && g_Game.Input.KeyPress(VK_UP) && comboInput == 2)
-		special_Up_Attack = true;
-
 
 	// 낙하 검사
 	if (!pObject->bGround)
@@ -282,16 +277,7 @@ void HeroAttack::UpdateState(CHero * pObject, float deltaTime)
 			return;
 		}
 		else
-		{
-
-			if (combo == 2 && special_Up_Attack)
-			{
-				pObject->renderer->SetAni(12);
-				combo = 3;
-			}
-			else
-				pObject->renderer->SetAni(7 + combo);
-		}
+			pObject->renderer->SetAni(7 + combo);
 	}
 
 	// 특정 콤보 시 이동가능
@@ -317,6 +303,87 @@ void HeroAttack::ExitState(CHero * pObject)
 
 // ============================================================================================================================================
 
+// SKY ATTACK
+
+// ============================================================================================================================================
+
+void HeroSkyAttack::EnterState(CHero * pObject)
+{
+	if (pObject->nowState)
+		pObject->nowState->ExitState(pObject);
+
+	pObject->nowState = this;
+
+	pObject->moveSpeed = 0;
+	pObject->bFlip = false;
+
+	pObject->renderer->SetAni(20);
+	combo = 0;
+	comboInput = 0;
+	timer = 0;
+	under_Attack = false;
+}
+
+void HeroSkyAttack::UpdateState(CHero * pObject, float deltaTime)
+{
+	// 선입력
+	if (g_Game.Input.KeyDown('A') && comboInput < 1)
+	{
+		comboInput++;
+	}
+
+	if (g_Game.Input.KeyDown('A') && g_Game.Input.KeyPress(VK_DOWN) && comboInput == 1)
+		under_Attack = true;
+
+
+	// 낙하 검사
+	/*if (!pObject->bGround)
+	{
+		HeroFall::instance->EnterState(pObject);
+		return;
+	}*/
+
+	// 선입력에 따른 콤보
+	if (!pObject->renderer->bAnimation && combo < comboInput)
+	{
+		combo++;
+		timer = 0;
+
+		if (under_Attack && combo == 1)
+		{
+			pObject->renderer->SetAni(22);
+		}
+		else
+		{
+			pObject->renderer->SetAni(21);
+		}
+	}
+
+	// 시간제한으로 상태 해제
+	if (timer > 0.3 && !pObject->renderer->bAnimation)
+	{
+		HeroFall::instance->EnterState(pObject);
+		HeroInAir::instance->isSkyAttack = true;
+		HeroJump::instance->isDoubleJump = true;
+		return;
+	}
+	//pObject->Move(deltaTime);
+
+	timer += deltaTime;
+	pObject->velocity = {0, 0};
+	pObject->gravity = 0.7f;
+}
+
+void HeroSkyAttack::ExitState(CHero * pObject)
+{
+	pObject->moveSpeed = 300;
+	pObject->bFlip = true;
+	pObject->gravity = 1;
+}
+
+
+// ============================================================================================================================================
+
 // SPECIIAL ATTACK
 
 // ============================================================================================================================================
@@ -332,6 +399,11 @@ void HeroSpecailAttack::EnterState(CHero * pObject)
 
 	if (g_Game.Input.KeyPress(VK_DOWN))
 		index = 1;
+	else if (g_Game.Input.KeyPress(VK_UP))
+	{
+		index = 2;
+		pObject->force.y += 50;
+	}
 	else
 	{
 		index = 0;
@@ -339,16 +411,17 @@ void HeroSpecailAttack::EnterState(CHero * pObject)
 	}
 
 	pObject->renderer->SetAni(10 + index);
+
 	timer = 0;
 }
 
 void HeroSpecailAttack::UpdateState(CHero * pObject, float deltaTime)
 {
-	if (!pObject->bGround)
+	/*if (!pObject->bGround)
 	{
 		HeroFall::instance->EnterState(pObject);
 		return;
-	}
+	}*/
 	if (timer > 0.3 && !pObject->renderer->bAnimation)
 	{
 		HeroIdle::instance->EnterState(pObject);
@@ -364,3 +437,4 @@ void HeroSpecailAttack::ExitState(CHero * pObject)
 	pObject->moveSpeed = 300;
 	pObject->bFlip = true;
 }
+

@@ -55,6 +55,8 @@ public:
 	static HeroInAir * instance;
 	int index;
 
+	bool isSkyAttack = false;
+
 	virtual void EnterState(CHero * pObject);
 	virtual void UpdateState(CHero * pObject, float deltaTime);
 	virtual void ExitState(CHero * pObject);
@@ -69,7 +71,21 @@ public:
 	int comboInput;
 	float timer;
 
-	bool special_Up_Attack;
+	virtual void EnterState(CHero * pObject);
+	virtual void UpdateState(CHero * pObject, float deltaTime);
+	virtual void ExitState(CHero * pObject);
+};
+
+class HeroSkyAttack :
+	public CState<CHero>
+{
+public:
+	static HeroSkyAttack * instance;
+	int combo;
+	int comboInput;
+	float timer;
+
+	bool under_Attack;
 
 	virtual void EnterState(CHero * pObject);
 	virtual void UpdateState(CHero * pObject, float deltaTime);
