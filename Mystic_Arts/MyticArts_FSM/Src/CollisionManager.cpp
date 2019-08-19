@@ -108,7 +108,6 @@ bool CollisionManager::RigidbodyCollision(CGameObject * gameObject)
 				ground = true;
 				gameObject->position.y = gameObject->fixedPos.y = rect2.bottom - 1;
 				gameObject->velocity.y = 0;
-				gameObject->velocity *= 0.5f;
 			}
 		}
 	}

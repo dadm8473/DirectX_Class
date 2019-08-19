@@ -84,6 +84,7 @@ void CGameObject::Update(float deltaTime)
 		if(!bGround)
 			force.y -= gravity * 1.5;
 		velocity += force * 10;
+		velocity.x *= 0.75f;
 		force = { 0,0 };
 		fixedPos = position;
 		position += velocity * deltaTime;
