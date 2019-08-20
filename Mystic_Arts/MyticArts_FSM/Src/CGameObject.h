@@ -36,6 +36,8 @@ public:
 
 	D3DXVECTOR2 fixedPos;
 
+	int collisionNum = 0;
+
 public:
 	CGameObject();
 	CGameObject(const TCHAR* key, const TCHAR* fileName, const TCHAR* extName, bool p_bAnimation, int p_TotalIndex = 0, int p_TotalFrame = 0, float p_Delay = 0);

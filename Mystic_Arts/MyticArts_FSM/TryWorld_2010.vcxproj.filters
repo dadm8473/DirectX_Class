@@ -152,6 +152,10 @@
       <Filter>GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="CHeroAttackCollider.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CScarecrow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\CSpriteRenderer.h">
@@ -204,6 +208,10 @@
       <Filter>GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="Platform.h" />
+    <ClInclude Include="CHeroAttackCollider.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CScarecrow.h" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">

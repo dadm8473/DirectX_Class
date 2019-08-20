@@ -14,26 +14,26 @@ bool bRigidbodyRender = false;
 //--------------------------------------------------------------------------------------
 // Rejects any D3D9 devices that aren't acceptable to the app by returning false
 //--------------------------------------------------------------------------------------
-bool CALLBACK IsD3D9DeviceAcceptable( D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat,
-                                      bool bWindowed, void* pUserContext )
+bool CALLBACK IsD3D9DeviceAcceptable(D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat,
+	bool bWindowed, void* pUserContext)
 {
-    // Typically want to skip back buffer formats that don't support alpha blending
-    IDirect3D9* pD3D = DXUTGetD3D9Object();
-    if( FAILED( pD3D->CheckDeviceFormat( pCaps->AdapterOrdinal, pCaps->DeviceType,
-                                         AdapterFormat, D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING,
-                                         D3DRTYPE_TEXTURE, BackBufferFormat ) ) )
-        return false;
+	// Typically want to skip back buffer formats that don't support alpha blending
+	IDirect3D9* pD3D = DXUTGetD3D9Object();
+	if (FAILED(pD3D->CheckDeviceFormat(pCaps->AdapterOrdinal, pCaps->DeviceType,
+		AdapterFormat, D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING,
+		D3DRTYPE_TEXTURE, BackBufferFormat)))
+		return false;
 
-    return true;
+	return true;
 }
 
 
 //--------------------------------------------------------------------------------------
 // Before a device is created, modify the device settings as needed
 //--------------------------------------------------------------------------------------
-bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* pUserContext )
+bool CALLBACK ModifyDeviceSettings(DXUTDeviceSettings* pDeviceSettings, void* pUserContext)
 {
-    return true;
+	return true;
 }
 
 
@@ -41,14 +41,16 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
 // Create any D3D9 resources that will live through a device reset (D3DPOOL_MANAGED)
 // and aren't tied to the back buffer size
 //--------------------------------------------------------------------------------------
-HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
-                                     void* pUserContext )
+HRESULT CALLBACK OnD3D9CreateDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
+	void* pUserContext)
 {
 	//MessageBoxA(DXUTGetHWND(), "TryWorld Create Device", "TryWorld MSG Box",MB_OK);
 
 	g_Game.Start();
 
-    return S_OK;
+	SetTimer(DXUTGetHWND(), 1, 1, NULL);
+
+	return S_OK;
 }
 
 
@@ -56,18 +58,18 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 // Create any D3D9 resources that won't live through a device reset (D3DPOOL_DEFAULT) 
 // or that are tied to the back buffer size 
 //--------------------------------------------------------------------------------------
-HRESULT CALLBACK OnD3D9ResetDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
-                                    void* pUserContext )
+HRESULT CALLBACK OnD3D9ResetDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
+	void* pUserContext)
 {
 	//MessageBoxA(DXUTGetHWND(), "TryWorld Reset Device", "TryWorld MSG Box", MB_OK);
-    return S_OK;
+	return S_OK;
 }
 
 
 //--------------------------------------------------------------------------------------
 // Handle updates to the scene.  This is called regardless of which D3D API is used
 //--------------------------------------------------------------------------------------
-void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext )
+void CALLBACK OnFrameMove(double fTime, float fElapsedTime, void* pUserContext)
 {
 	//g_.FrameMove();
 	//MessageBoxA(DXUTGetHWND(), "TryWorld Frame Move", "TryWorld MSG Box", MB_OK);
@@ -85,71 +87,97 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 //--------------------------------------------------------------------------------------
 // Render the scene using the D3D9 device
 //--------------------------------------------------------------------------------------
-void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, float fElapsedTime, void* pUserContext )
+void CALLBACK OnD3D9FrameRender(IDirect3DDevice9* pd3dDevice, double fTime, float fElapsedTime, void* pUserContext)
 {
-    HRESULT hr;
+	HRESULT hr;
 
-    // Clear the render target and the zbuffer 
-    V( pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 0, 255, 255, 255 ), 1.0f, 0 ) );
+	// Clear the render target and the zbuffer 
+	V(pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, 170, 170, 170), 1.0f, 0));
 
-    // Render the scene
-    if( SUCCEEDED( pd3dDevice->BeginScene() ) )
-    {
+	// Render the scene
+	if (SUCCEEDED(pd3dDevice->BeginScene()))
+	{
 		g_Game.Render();
 
-        V( pd3dDevice->EndScene() );
+		V(pd3dDevice->EndScene());
 		//MessageBoxA(DXUTGetHWND(), "TryWorld Frame Render", "TryWorld MSG Box", MB_OK);
-    }
+	}
 }
 
 
 //--------------------------------------------------------------------------------------
 // Handle messages to the application 
 //--------------------------------------------------------------------------------------
-LRESULT CALLBACK MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
-                          bool* pbNoFurtherProcessing, void* pUserContext )
+LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
+	bool* pbNoFurtherProcessing, void* pUserContext)
 {
 	PAINTSTRUCT ps;
-	HDC hdc;
+	HDC hdc, memdc;
+	HBITMAP hBit = NULL, oldBit;
 	switch (uMsg)
 	{
+		//case WM_TIMER:
+		//	InvalidateRgn(DXUTGetHWND(), NULL, false);
+		//	break;
 	case WM_PAINT:
 		hdc = BeginPaint(DXUTGetHWND(), &ps);
+		memdc = CreateCompatibleDC(hdc);
 
 		if (bRigidbodyRender)
 			if (g_OpenScene)
 			{
-				HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-				HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, myBrush);
-				HPEN myPen = CreatePen(PS_SOLID, 2, RGB(0, 255, 255));
-				HPEN oldPen = (HPEN)SelectObject(hdc, myPen);
+				if (!hBit)
+					hBit = CreateCompatibleBitmap(hdc, g_Game.windowWidth, g_Game.windowHeight);
+				oldBit = (HBITMAP)SelectObject(memdc, hBit);
+
+				HBRUSH nullBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+				HBRUSH oldBrush = (HBRUSH)SelectObject(memdc, nullBrush);
+				HPEN rigidbodyPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 0));
+				HPEN oldPen = (HPEN)SelectObject(memdc, rigidbodyPen);
+
+				BitBlt(memdc, 0, 0, g_Game.windowWidth, g_Game.windowHeight, hdc, 0, 0, SRCCOPY);
 
 				for each (CGameObject * var in g_OpenScene->m_CollisionManager.rigidbodyList)
 				{
-					RECT temp;
 					// 사각형(RECT) 충돌검사
 					D3DXVECTOR2 vtemp = { 512, -384 };
 					vtemp += var->position + var->rigidboydOffset;
 					vtemp.y *= -1;
 
-					SetRect(&temp,
-						vtemp.x - var->rigidboydScale.x * 0.5f,
-						vtemp.y - var->rigidboydScale.y * 0.5f,
-						vtemp.x + var->rigidboydScale.x * 0.5f,
-						vtemp.y + var->rigidboydScale.y * 0.5f
-					);
-
-
-					Rectangle(hdc, vtemp.x - var->rigidboydScale.x * 0.5f,
+					Rectangle(memdc, vtemp.x - var->rigidboydScale.x * 0.5f,
 						vtemp.y - var->rigidboydScale.y * 0.5f,
 						vtemp.x + var->rigidboydScale.x * 0.5f,
 						vtemp.y + var->rigidboydScale.y * 0.5f);
 				}
-				SelectObject(hdc, oldBrush);
-				DeleteObject(myBrush);
-				SelectObject(hdc, oldPen);
-				DeleteObject(myPen);
+
+				HPEN colliderPen = CreatePen(PS_SOLID, 2, RGB(150, 255, 150));
+				SelectObject(memdc, colliderPen);
+
+				for (int i = 0; i < CL_MAX; ++i)
+					for each (CGameObject * var in g_OpenScene->m_CollisionManager.colliderLists[i])
+					{
+						D3DXVECTOR2 vtemp = { 512, -384 };
+						vtemp += var->position + var->colliderOffset;
+						vtemp.y *= -1;
+
+						Rectangle(memdc, vtemp.x - var->colliderScale.x * 0.5f,
+							vtemp.y - var->colliderScale.y * 0.5f,
+							vtemp.x + var->colliderScale.x * 0.5f,
+							vtemp.y + var->colliderScale.y * 0.5f);
+					}
+				SelectObject(memdc, oldBrush);
+				DeleteObject(nullBrush);
+				SelectObject(memdc, oldPen);
+				DeleteObject(rigidbodyPen);
+				DeleteObject(colliderPen);
+
+				// 더블 버퍼링
+				BitBlt(hdc, 0, 0, g_Game.windowWidth, g_Game.windowHeight, memdc, 0, 0, SRCCOPY);
+				SelectObject(memdc, oldBit);
+
+				DeleteObject(hBit);
 			}
+		DeleteObject(memdc);
 		EndPaint(DXUTGetHWND(), &ps);
 
 		break;
@@ -165,8 +193,8 @@ LRESULT CALLBACK MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
 			}
 		}
 		break;
-	//case WM_LBUTTONDOWN:
-	//	break;
+		//case WM_LBUTTONDOWN:
+		//	break;
 	case WM_LBUTTONUP:
 		if (g_Game.mouse)
 			g_Game.mouse->bCollision = true;
@@ -180,14 +208,14 @@ LRESULT CALLBACK MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
 		}
 		break;
 	}
-    return 0;
+	return 0;
 }
 
 
 //--------------------------------------------------------------------------------------
 // Release D3D9 resources created in the OnD3D9ResetDevice callback 
 //--------------------------------------------------------------------------------------
-void CALLBACK OnD3D9LostDevice( void* pUserContext )
+void CALLBACK OnD3D9LostDevice(void* pUserContext)
 {
 	g_Game.Destroy();
 
@@ -198,7 +226,7 @@ void CALLBACK OnD3D9LostDevice( void* pUserContext )
 //--------------------------------------------------------------------------------------
 // Release D3D9 resources created in the OnD3D9CreateDevice callback 
 //--------------------------------------------------------------------------------------
-void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
+void CALLBACK OnD3D9DestroyDevice(void* pUserContext)
 {
 	//MessageBoxA(DXUTGetHWND(), "TryWorld Destory Device", "TryWorld MSG Box", MB_OK);
 }
@@ -207,39 +235,39 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
 //--------------------------------------------------------------------------------------
 // Initialize everything and go into a render loop
 //--------------------------------------------------------------------------------------
-INT WINAPI wWinMain( HINSTANCE, HINSTANCE, LPWSTR, int )
+INT WINAPI wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
 {
-    // Enable run-time memory check for debug builds.
+	// Enable run-time memory check for debug builds.
 #if defined(DEBUG) | defined(_DEBUG)
-    _CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    // Set the callback functions
-    DXUTSetCallbackD3D9DeviceAcceptable( IsD3D9DeviceAcceptable );
-    DXUTSetCallbackD3D9DeviceCreated( OnD3D9CreateDevice );
-    DXUTSetCallbackD3D9DeviceReset( OnD3D9ResetDevice );
-    DXUTSetCallbackD3D9FrameRender( OnD3D9FrameRender );
-    DXUTSetCallbackD3D9DeviceLost( OnD3D9LostDevice );
-    DXUTSetCallbackD3D9DeviceDestroyed( OnD3D9DestroyDevice );
-    DXUTSetCallbackDeviceChanging( ModifyDeviceSettings );
-    DXUTSetCallbackMsgProc( MsgProc );
-    DXUTSetCallbackFrameMove( OnFrameMove );
+	// Set the callback functions
+	DXUTSetCallbackD3D9DeviceAcceptable(IsD3D9DeviceAcceptable);
+	DXUTSetCallbackD3D9DeviceCreated(OnD3D9CreateDevice);
+	DXUTSetCallbackD3D9DeviceReset(OnD3D9ResetDevice);
+	DXUTSetCallbackD3D9FrameRender(OnD3D9FrameRender);
+	DXUTSetCallbackD3D9DeviceLost(OnD3D9LostDevice);
+	DXUTSetCallbackD3D9DeviceDestroyed(OnD3D9DestroyDevice);
+	DXUTSetCallbackDeviceChanging(ModifyDeviceSettings);
+	DXUTSetCallbackMsgProc(MsgProc);
+	DXUTSetCallbackFrameMove(OnFrameMove);
 
-    // TODO: Perform any application-level initialization here
+	// TODO: Perform any application-level initialization here
 
-    // Initialize DXUT and create the desired Win32 window and Direct3D device for the application
-    DXUTInit( true, true ); // Parse the command line and show msgboxes
-    DXUTSetHotkeyHandling( true, true, true );  // handle the default hotkeys
-    DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
-    DXUTCreateWindow( L"TryWorld" );
+	// Initialize DXUT and create the desired Win32 window and Direct3D device for the application
+	DXUTInit(true, true); // Parse the command line and show msgboxes
+	DXUTSetHotkeyHandling(true, true, true);  // handle the default hotkeys
+	DXUTSetCursorSettings(true, true); // Show the cursor and clip it when in full screen
+	DXUTCreateWindow(L"TryWorld");
 	DXUTCreateDevice(true, 1024, 768);
 
-    // Start the render loop
-    DXUTMainLoop();
+	// Start the render loop
+	DXUTMainLoop();
 
-    // TODO: Perform any application-level cleanup here
+	// TODO: Perform any application-level cleanup here
 
-    return DXUTGetExitCode();
+	return DXUTGetExitCode();
 }
 
 

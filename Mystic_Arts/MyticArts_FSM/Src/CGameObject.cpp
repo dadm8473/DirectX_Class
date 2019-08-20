@@ -82,12 +82,19 @@ void CGameObject::Update(float deltaTime)
 	{
 		// 현재 힘에 따른 물리적 위치 이동
 		if(!bGround)
-			force.y -= gravity * 1.5;
+			force.y -= gravity * 3;
 		velocity += force * 10;
-		velocity.x *= 0.75f;
 		force = { 0,0 };
 		fixedPos = position;
 		position += velocity * deltaTime;
+
+		if (abs(velocity.x) >= 100)
+			velocity.x -= 150 * velocity.x / abs(velocity.x) * min(abs(velocity.x), 100) * deltaTime;
+		else
+			velocity.x = 0;
+
+		if (position.x < g_OpenScene->limitrect.left + 20 || position.x >g_OpenScene->limitrect.right - 20)
+			position.x = fixedPos.x;
 
 		// 플랫폼과 충돌했는지 검사
 		bGround = g_OpenScene->m_CollisionManager.RigidbodyCollision(this);

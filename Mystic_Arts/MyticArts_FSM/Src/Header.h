@@ -12,6 +12,8 @@ enum COLLIDER_LAYER
 {
 	CL_NONE,
 	CL_UNIT,
+	CL_ENEMY,
+	CL_PLAYERATTACK,
 	CL_PLATFORM,
 	CL_MOUSE,
 	CL_MAX,
@@ -48,5 +50,8 @@ extern Scene * g_OpenScene;
 #include "Platform.h"
 
 #include "CState.h"
+#include "CHeroAttackCollider.h"
 #include "HeroState.h"
 #include "CHero.h"
+
+#include "CScarecrow.h"

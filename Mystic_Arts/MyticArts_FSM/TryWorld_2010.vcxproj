@@ -385,8 +385,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CHeroAttackCollider.cpp" />
+    <ClCompile Include="CScarecrow.cpp" />
     <ClCompile Include="HeroState.cpp" />
     <ClInclude Include="CHero.h" />
+    <ClInclude Include="CHeroAttackCollider.h" />
+    <ClInclude Include="CScarecrow.h" />
     <ClInclude Include="CState.h" />
     <ClInclude Include="HeroState.h" />
     <ClInclude Include="Platform.h" />

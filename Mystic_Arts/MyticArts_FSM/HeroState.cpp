@@ -37,7 +37,7 @@ void HeroIdle::UpdateState(CHero * pObject, float deltaTime)
 	}
 	if (g_Game.Input.KeyDown('A'))
 	{
-		if (g_Game.Input.KeyPress(VK_DOWN))
+		if (pObject->SetSpecialIndex() != -1)
 			HeroSpecailAttack::instance->EnterState(pObject);
 		else
 			HeroAttack::instance->EnterState(pObject);
@@ -78,17 +78,28 @@ void HeroMove::UpdateState(CHero * pObject, float deltaTime)
 	}
 	if (g_Game.Input.KeyDown('A'))
 	{
-		HeroAttack::instance->EnterState(pObject);
+		if (pObject->SetSpecialIndex() != -1)
+			HeroSpecailAttack::instance->EnterState(pObject);
+		else
+			HeroAttack::instance->EnterState(pObject);
 		return;
 	}
+
+	if (g_Game.Input.KeyDown('S'))
+	{
+		if (g_Game.Input.KeyPress(VK_DOWN) && pObject->position.y > -300)
+		{
+			pObject->position.y -= 10;
+			HeroFall::instance->EnterState(pObject);
+		}
+		else
+			HeroJump::instance->EnterState(pObject);
+		return;
+	}
+
 	if (!pObject->Move(deltaTime))
 	{
 		HeroIdle::instance->EnterState(pObject);
-		return;
-	}
-	if (g_Game.Input.KeyDown('S'))
-	{
-		HeroJump::instance->EnterState(pObject);
 		return;
 	}
 
@@ -113,7 +124,7 @@ void HeroJump::EnterState(CHero * pObject)
 
 	pObject->nowState = this;
 
-	pObject->force.y += 50;
+	pObject->velocity.y = 800;
 
 	pObject->renderer->SetAni(3);
 }
@@ -208,9 +219,9 @@ void HeroInAir::UpdateState(CHero * pObject, float deltaTime)
 		//pObject->nowState = this;
 
 		if(index == 3)
-			pObject->force.y += 40;
+			pObject->velocity.y = 800;
 		else
-			pObject->force.y += 70;
+			pObject->velocity.y = 800;
 
 		pObject->renderer->SetAni(3);
 
@@ -245,6 +256,11 @@ void HeroAttack::EnterState(CHero * pObject)
 	pObject->bFlip = false;
 
 	pObject->renderer->SetAni(7);
+	pObject->heroAttackCollider->bCollision = true;
+	pObject->heroAttackCollider->collisionNum++;
+	pObject->heroAttackCollider->attackVector = { 1,0 };
+	pObject->heroAttackCollider->attackPower = 300;
+
 	combo = 0;
 	comboInput = 0;
 	timer = 0;
@@ -253,9 +269,15 @@ void HeroAttack::EnterState(CHero * pObject)
 void HeroAttack::UpdateState(CHero * pObject, float deltaTime)
 {
 	// 선입력
-	if (g_Game.Input.KeyDown('A') && comboInput < 3)
+	if (g_Game.Input.KeyDown('A'))
 	{
-		comboInput++;
+		if (pObject->SetSpecialIndex() != -1)
+		{
+			HeroSpecailAttack::instance->EnterState(pObject);
+			return;
+		}
+		else if (comboInput < 3)
+			comboInput++;
 	}
 
 	// 낙하 검사
@@ -277,12 +299,20 @@ void HeroAttack::UpdateState(CHero * pObject, float deltaTime)
 			return;
 		}
 		else
+		{
 			pObject->renderer->SetAni(7 + combo);
+			pObject->heroAttackCollider->bCollision = true;
+			pObject->heroAttackCollider->collisionNum++;
+		}
 	}
 
 	// 특정 콤보 시 이동가능
-	if(combo > 1)
+	if (combo > 1)
+	{
 		pObject->moveSpeed = 80;
+		pObject->heroAttackCollider->attackVector = { 1, 0.4 };
+		pObject->heroAttackCollider->attackPower = 1000;
+	}
 
 	// 시간제한으로 상태 해제
 	if (timer > 0.3 && !pObject->renderer->bAnimation)
@@ -299,6 +329,7 @@ void HeroAttack::ExitState(CHero * pObject)
 {
 	pObject->moveSpeed = 300;
 	pObject->bFlip = true;
+	pObject->heroAttackCollider->bCollision = false;
 }
 
 // ============================================================================================================================================
@@ -317,11 +348,20 @@ void HeroSkyAttack::EnterState(CHero * pObject)
 	pObject->moveSpeed = 0;
 	pObject->bFlip = false;
 
-	pObject->renderer->SetAni(20);
+	pObject->renderer->SetAni(17);
 	combo = 0;
 	comboInput = 0;
 	timer = 0;
 	under_Attack = false;
+
+	pObject->heroAttackCollider->bCollision = true;
+	pObject->heroAttackCollider->collisionNum++;
+	pObject->heroAttackCollider->attackVector = { 0.1,0.5 };
+	pObject->heroAttackCollider->attackPower = 200;
+
+	pObject->gravity = 0.1;
+	pObject->velocity.y = 0;
+	pObject->bJumpAttack = false;
 }
 
 void HeroSkyAttack::UpdateState(CHero * pObject, float deltaTime)
@@ -351,11 +391,17 @@ void HeroSkyAttack::UpdateState(CHero * pObject, float deltaTime)
 
 		if (under_Attack && combo == 1)
 		{
-			pObject->renderer->SetAni(22);
+			pObject->renderer->SetAni(19);
+			pObject->heroAttackCollider->collisionNum++;
+			pObject->heroAttackCollider->attackVector = { 1, -1 };
+			pObject->heroAttackCollider->attackPower = 2000;
 		}
 		else
 		{
-			pObject->renderer->SetAni(21);
+			pObject->renderer->SetAni(18);
+			pObject->heroAttackCollider->collisionNum++;
+			pObject->heroAttackCollider->attackVector = { 2,0.2 };
+			pObject->heroAttackCollider->attackPower = 2000;
 		}
 	}
 
@@ -379,6 +425,7 @@ void HeroSkyAttack::ExitState(CHero * pObject)
 	pObject->moveSpeed = 300;
 	pObject->bFlip = true;
 	pObject->gravity = 1;
+	pObject->heroAttackCollider->bCollision = false;
 }
 
 
@@ -394,40 +441,90 @@ void HeroSpecailAttack::EnterState(CHero * pObject)
 
 	pObject->nowState = this;
 
-	pObject->moveSpeed = 0;
+	pObject->moveSpeed = 80;
 	pObject->bFlip = false;
 
-	if (g_Game.Input.KeyPress(VK_DOWN))
-		index = 1;
-	else if (g_Game.Input.KeyPress(VK_UP))
+	pObject->heroAttackCollider->bCollision = true;
+	pObject->heroAttackCollider->collisionNum++;
+	//★★★★★
+	// 공격 커멘드 입력 비 충족 시
+	if (pObject->specialIndex == -1)
 	{
-		index = 2;
-		pObject->force.y += 50;
+		if (g_Game.Input.KeyPress(VK_DOWN))
+		{
+			pObject->specialIndex = 1;
+			pObject->moveSpeed = 0;
+		}
+		else if (g_Game.Input.KeyPress(VK_UP))
+		{
+			pObject->specialIndex = 2;
+			pObject->velocity.y = 800;
+		}
+		else
+			pObject->specialIndex = 0;
 	}
 	else
+		//★★★★★
+		// 공격 커멘드 입력 비 충족 시
 	{
-		index = 0;
-		pObject->moveSpeed = 80;
+		pObject->prevInput = -1;
+		pObject->nowInput = -1;
+		switch (pObject->specialIndex)
+		{
+		case 0:
+			pObject->velocity.x += pObject->scale.x * 2000;
+			break;
+		case 2:
+			pObject->velocity.x += pObject->scale.x * 1200;
+			break;
+		case 3:
+			pObject->velocity.x += pObject->scale.x * 1500;
+			pObject->velocity.y = 200;
+			break;
+		case 4:
+			break;
+		default:
+			break;
+		}
 	}
 
-	pObject->renderer->SetAni(10 + index);
+	switch (pObject->specialIndex)
+	{
+	case 0:
+		pObject->heroAttackCollider->attackVector = { 1,0.2 };
+		pObject->heroAttackCollider->attackPower = 3000;
+		break;
+	case 2:
+		pObject->heroAttackCollider->attackVector = { 0.1,1 };
+		pObject->heroAttackCollider->attackPower = 1000;
+		break;
+	case 3:
+		pObject->heroAttackCollider->attackVector = { 1, 0.2 };
+		pObject->heroAttackCollider->attackPower = 1500;
+		break;
+	case 4:
+		pObject->heroAttackCollider->attackVector = { 1,0.6 };
+		pObject->heroAttackCollider->attackPower = 50;
+		break;
+	}
 
+	pObject->renderer->SetAni(10 + pObject->specialIndex);
 	timer = 0;
 }
 
 void HeroSpecailAttack::UpdateState(CHero * pObject, float deltaTime)
 {
-	/*if (!pObject->bGround)
-	{
-		HeroFall::instance->EnterState(pObject);
-		return;
-	}*/
-	if (timer > 0.3 && !pObject->renderer->bAnimation)
+	if (timer > 0.4)
 	{
 		HeroIdle::instance->EnterState(pObject);
 		return;
 	}
-	pObject->Move(deltaTime);
+	if (pObject->specialIndex == 4)
+	{
+		pObject->velocity.x += pObject->scale.x * 150;
+	}
+	else
+		pObject->Move(deltaTime);
 
 	timer += deltaTime;
 }
@@ -436,5 +533,5 @@ void HeroSpecailAttack::ExitState(CHero * pObject)
 {
 	pObject->moveSpeed = 300;
 	pObject->bFlip = true;
+	pObject->heroAttackCollider->bCollision = false;
 }
-

@@ -17,6 +17,8 @@ int TitleScene::Start()
 
 	CHero * temp = new CHero;
 
+	CScarecrow * temp2 = new CScarecrow;
+
 	Platform * Platformtemp = new Platform;
 	Platformtemp->position = { 0,-320 };
 	Platformtemp->platformScale = { 1024, 60 };
