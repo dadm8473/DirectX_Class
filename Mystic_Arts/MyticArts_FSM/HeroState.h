@@ -104,3 +104,14 @@ public:
 	virtual void UpdateState(CHero * pObject, float deltaTime);
 	virtual void ExitState(CHero * pObject);
 };
+
+class HeroGuard :
+	public CState<CHero>
+{
+public:
+	static HeroGuard * instance;
+
+	virtual void EnterState(CHero * pObject);
+	virtual void UpdateState(CHero * pObject, float deltaTime);
+	virtual void ExitState(CHero * pObject);
+};

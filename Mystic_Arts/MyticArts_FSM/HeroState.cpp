@@ -24,17 +24,18 @@ void HeroIdle::UpdateState(CHero * pObject, float deltaTime)
 		HeroFall::instance->EnterState(pObject);
 		return;
 	}
+
+	if (g_Game.Input.KeyPress(VK_DOWN))
+	{
+		HeroGuard::instance->EnterState(pObject);
+	}
+
 	if (g_Game.Input.KeyDown('S'))
 	{
-		if (g_Game.Input.KeyPress(VK_DOWN) && pObject->position.y > -300)
-		{
-			pObject->position.y -= 10;
-			HeroFall::instance->EnterState(pObject);
-		}
-		else
-			HeroJump::instance->EnterState(pObject);
+		HeroJump::instance->EnterState(pObject);
 		return;
 	}
+
 	if (g_Game.Input.KeyDown('A'))
 	{
 		if (pObject->SetSpecialIndex() != -1)
@@ -43,6 +44,7 @@ void HeroIdle::UpdateState(CHero * pObject, float deltaTime)
 			HeroAttack::instance->EnterState(pObject);
 		return;
 	}
+
 	if (pObject->Move(deltaTime))
 	{
 		HeroMove::instance->EnterState(pObject);
@@ -87,10 +89,9 @@ void HeroMove::UpdateState(CHero * pObject, float deltaTime)
 
 	if (g_Game.Input.KeyDown('S'))
 	{
-		if (g_Game.Input.KeyPress(VK_DOWN) && pObject->position.y > -300)
+		if (g_Game.Input.KeyPress(VK_DOWN))
 		{
-			pObject->position.y -= 10;
-			HeroFall::instance->EnterState(pObject);
+			HeroGuard::instance->EnterState(pObject);
 		}
 		else
 			HeroJump::instance->EnterState(pObject);
@@ -534,4 +535,50 @@ void HeroSpecailAttack::ExitState(CHero * pObject)
 	pObject->moveSpeed = 300;
 	pObject->bFlip = true;
 	pObject->heroAttackCollider->bCollision = false;
+}
+
+// ============================================================================================================================================
+
+// Guard
+
+// ============================================================================================================================================
+void HeroGuard::EnterState(CHero * pObject)
+{
+	if (pObject->nowState)
+		pObject->nowState->ExitState(pObject);
+
+	pObject->nowState = this;
+
+	pObject->moveSpeed = 0;
+	pObject->bFlip = false;
+
+	pObject->renderer->SetAni(20);
+	pObject->mass = 10;
+}
+
+void HeroGuard::UpdateState(CHero * pObject, float deltaTime)
+{
+	// 지면 검사
+	if (g_Game.Input.KeyUp(VK_DOWN))
+	{
+		HeroIdle::instance->EnterState(pObject);
+		return;
+	}
+	if (g_Game.Input.KeyDown('A'))
+	{
+		HeroSpecailAttack::instance->EnterState(pObject);
+		return;
+	}
+	if (g_Game.Input.KeyDown('S') && pObject->position.y > -300)
+	{
+		pObject->position.y -= 10;
+		HeroFall::instance->EnterState(pObject);
+	}
+}
+
+void HeroGuard::ExitState(CHero * pObject)
+{
+	pObject->moveSpeed = 300;
+	pObject->bFlip = true;
+	pObject->mass = 1;
 }

@@ -385,13 +385,23 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CEnemyAttackCollidedr.cpp" />
+    <ClCompile Include="CGolem.cpp" />
     <ClCompile Include="CHeroAttackCollider.cpp" />
+    <ClCompile Include="CPlatformCheck.cpp" />
+    <ClCompile Include="CPlayerCheck.cpp" />
     <ClCompile Include="CScarecrow.cpp" />
+    <ClCompile Include="GolemState.cpp" />
     <ClCompile Include="HeroState.cpp" />
+    <ClInclude Include="CEnemyAttackCollider.h" />
+    <ClInclude Include="CGolem.h" />
     <ClInclude Include="CHero.h" />
     <ClInclude Include="CHeroAttackCollider.h" />
+    <ClInclude Include="CPlatformCheck.h" />
+    <ClInclude Include="CPlayerCheck.h" />
     <ClInclude Include="CScarecrow.h" />
     <ClInclude Include="CState.h" />
+    <ClInclude Include="GolemState.h" />
     <ClInclude Include="HeroState.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Src\MousePoint.h" />

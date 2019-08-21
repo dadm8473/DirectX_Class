@@ -82,14 +82,14 @@ void CGameObject::Update(float deltaTime)
 	{
 		// 현재 힘에 따른 물리적 위치 이동
 		if(!bGround)
-			force.y -= gravity * 3;
-		velocity += force * 10;
+			force.y -= gravity * 200 * mass * deltaTime;
+		velocity += force * 1 / mass * 10;
 		force = { 0,0 };
 		fixedPos = position;
 		position += velocity * deltaTime;
 
 		if (abs(velocity.x) >= 100)
-			velocity.x -= 150 * velocity.x / abs(velocity.x) * min(abs(velocity.x), 100) * deltaTime;
+			velocity.x -= (bGround ? 100 : 10) * velocity.x / abs(velocity.x) * min(abs(velocity.x), 100) * deltaTime;
 		else
 			velocity.x = 0;
 

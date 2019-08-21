@@ -31,6 +31,7 @@ public:
 	D3DXVECTOR2 rigidboydOffset;
 	D3DXVECTOR2 rigidboydScale;
 	float gravity = 0;
+	float mass = 1;
 	D3DXVECTOR2 force = { 0,0 };
 	D3DXVECTOR2 velocity = { 0,0 };
 

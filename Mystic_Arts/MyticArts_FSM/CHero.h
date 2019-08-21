@@ -64,4 +64,3 @@ public:
 	bool Move(float deltaTime);
 	int SetSpecialIndex();
 };
-

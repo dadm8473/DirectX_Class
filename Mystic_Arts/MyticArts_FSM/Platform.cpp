@@ -21,6 +21,9 @@ void Platform::Start()
 
 	type = PLATFORM;
 	CreateRigidBody(D3DXVECTOR2(0, -50), D3DXVECTOR2(platformScale.x, platformScale.y));
+	
+
+	CreateCollider(CL_PLATFORM, D3DXVECTOR2(0, -50), D3DXVECTOR2(platformScale.x, platformScale.y));
 
 	gravity = 0;
 

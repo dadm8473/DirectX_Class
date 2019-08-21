@@ -19,6 +19,9 @@ int TitleScene::Start()
 
 	CScarecrow * temp2 = new CScarecrow;
 
+	CGolem * temp3 = new CGolem;
+	temp3->position = { 100, 0 };
+
 	Platform * Platformtemp = new Platform;
 	Platformtemp->position = { 0,-320 };
 	Platformtemp->platformScale = { 1024, 60 };

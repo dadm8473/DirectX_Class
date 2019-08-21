@@ -37,6 +37,6 @@ void CHeroAttackCollider::OnCollision(CGameObject * CollisionObject)
 
 	vtemp.x *= parent->scale.x;
 	D3DXVec2Normalize(&vtemp, &vtemp);
-	CollisionObject->velocity = vtemp * attackPower;
+	CollisionObject->force = vtemp * attackPower * 0.1f;
 	CollisionObject->collisionNum = collisionNum;
 }

@@ -42,6 +42,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{95e653bc-1244-46d9-bbe8-385c635e7d04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Enemy\Golem">
+      <UniqueIdentifier>{c6cc8a42-0576-4fd0-b18c-f7a46463e2ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -147,15 +150,34 @@
     <ClCompile Include="Src\MousePoint.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="CHero.cpp" />
     <ClCompile Include="HeroState.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Platform.cpp" />
     <ClCompile Include="CHeroAttackCollider.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="CScarecrow.cpp" />
+    <ClCompile Include="CGolem.cpp">
+      <Filter>GameObject\Enemy\Golem</Filter>
+    </ClCompile>
+    <ClCompile Include="GolemState.cpp">
+      <Filter>GameObject\Enemy\Golem</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerCheck.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlatformCheck.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CHero.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemyAttackCollidedr.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\CSpriteRenderer.h">
@@ -202,16 +224,35 @@
     <ClInclude Include="Src\MousePoint.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="CHero.h" />
     <ClInclude Include="CState.h" />
     <ClInclude Include="HeroState.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Platform.h" />
     <ClInclude Include="CHeroAttackCollider.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="CScarecrow.h" />
+    <ClInclude Include="CGolem.h">
+      <Filter>GameObject\Enemy\Golem</Filter>
+    </ClInclude>
+    <ClInclude Include="GolemState.h">
+      <Filter>GameObject\Enemy\Golem</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerCheck.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlatformCheck.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CHero.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyAttackCollider.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
