@@ -36,7 +36,7 @@ bool CollisionManager::Collision(CGameObject * gameObject)
 
 			//if (length <= gameObject->radius * abs(gameObject->scale.x) + abs(var->radius * var->scale.x))
 			//	gameObject->OnCollision(var);
-			
+
 			// 사각형(RECT) 충돌검사
 			D3DXVECTOR2 vtemp = gameObject->position + gameObject->colliderOffset;
 
@@ -67,7 +67,7 @@ bool CollisionManager::Collision(CGameObject * gameObject)
 
 bool CollisionManager::RigidbodyCollision(CGameObject * gameObject)
 {
-	if (gameObject->type == PLATFORM)
+	if (gameObject->type == PLATFORM || gameObject->type == WALL)
 		return false;
 
 	bool ground = false;
@@ -108,6 +108,33 @@ bool CollisionManager::RigidbodyCollision(CGameObject * gameObject)
 				ground = true;
 				gameObject->position.y = gameObject->fixedPos.y = rect2.bottom - 1;
 				gameObject->velocity.y = 0;
+			}
+
+			// 콜라이더 충돌
+			if (var->type == WALL)
+			{
+				float speed = D3DXVec2Length(&gameObject->velocity);
+				if (speed > 100)
+				{
+					g_OpenScene->ShakeCamera(0.5, 5);
+				}
+				gameObject->position.x = var->position.x - gameObject->velocity.x / abs(gameObject->velocity.x) * (gameObject->rigidboydScale.x * 0.5 + var->rigidboydScale.x * 0.5);
+				gameObject->velocity.x *= -0.8;
+			}
+
+			// 콜라이더 충돌
+			if (gameObject->type == CL_PLAYER && var->type == CL_ENEMY)
+			{
+				float speed = D3DXVec2Length(&gameObject->velocity);
+				if (speed != 0 && gameObject->bGround)
+					var->position.x = gameObject->position.x + (var->position.x - gameObject->position.x) / abs(var->position.x - gameObject->position.x) * (var->rigidboydScale.x * 0.5 + gameObject->rigidboydScale.x * 0.5);
+			}
+
+			if (gameObject->type == CL_ENEMY && var->type == CL_PLAYER)
+			{
+				float speed = D3DXVec2Length(&gameObject->velocity);
+				if (speed != 0 && gameObject->bGround)
+					var->position.x = gameObject->position.x + (var->position.x - gameObject->position.x) / abs(var->position.x - gameObject->position.x) * (var->rigidboydScale.x * 0.5 + gameObject->rigidboydScale.x * 0.5);
 			}
 		}
 	}

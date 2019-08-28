@@ -3,6 +3,7 @@
 enum OBJECT_TYPE
 {
 	PLATFORM,
+	WALL,
 	GAMEOBJECT,
 	HUD,
 	UIOBJECT,
@@ -51,6 +52,7 @@ extern Scene * g_OpenScene;
 #include "ScoreBoard.h"
 
 #include "Platform.h"
+#include "Wall.h"
 
 #include "CPlatformCheck.h"
 #include "CPlayerCheck.h"

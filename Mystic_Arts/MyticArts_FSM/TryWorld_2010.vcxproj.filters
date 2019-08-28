@@ -178,6 +178,9 @@
     <ClCompile Include="CEnemyAttackCollidedr.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>GameObject\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\CSpriteRenderer.h">
@@ -252,6 +255,9 @@
     </ClInclude>
     <ClInclude Include="CEnemyAttackCollider.h">
       <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>GameObject\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

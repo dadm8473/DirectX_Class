@@ -393,6 +393,7 @@
     <ClCompile Include="CScarecrow.cpp" />
     <ClCompile Include="GolemState.cpp" />
     <ClCompile Include="HeroState.cpp" />
+    <ClCompile Include="Wall.cpp" />
     <ClInclude Include="CEnemyAttackCollider.h" />
     <ClInclude Include="CGolem.h" />
     <ClInclude Include="CHero.h" />
@@ -413,6 +414,7 @@
     <ClInclude Include="Src\ResourceManager.h" />
     <ClInclude Include="Src\Scene.h" />
     <ClInclude Include="Src\TitleScene.h" />
+    <ClInclude Include="Wall.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="Src\CInput.h" />
     <ClInclude Include="Src\CollisionManager.h" />

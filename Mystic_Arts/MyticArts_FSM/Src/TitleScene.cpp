@@ -42,6 +42,12 @@ int TitleScene::Start()
 	Platformtemp->position = { 0, -150 };
 	Platformtemp->platformScale = { 300, 60 };
 
+	Wall * wall = new Wall;
+	wall->position = {-g_Game.windowWidth * 0.5f + 100, 0 };
+	
+	wall = new Wall;
+	wall->position = { g_Game.windowWidth * 0.5f - 100, 0 };
+
 	return 0;
 }
 
