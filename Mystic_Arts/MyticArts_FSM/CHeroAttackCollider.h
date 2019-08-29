@@ -14,6 +14,9 @@ public:
 
 	int collisionNum = 0;
 
+	CHeroAttackEffect * attackEffect;
+	D3DXVECTOR2 effectPos = { 0, 0 };
+
 	virtual void Start();
 	virtual void Update(float deltaTime);
 	virtual void OnCollision(CGameObject* CollisionObject);

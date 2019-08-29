@@ -109,32 +109,57 @@ bool CollisionManager::RigidbodyCollision(CGameObject * gameObject)
 				gameObject->position.y = gameObject->fixedPos.y = rect2.bottom - 1;
 				gameObject->velocity.y = 0;
 			}
-
 			// 콜라이더 충돌
-			if (var->type == WALL)
+			else if (var->type == WALL)
 			{
 				float speed = D3DXVec2Length(&gameObject->velocity);
-				if (speed > 100)
+				if (speed > 1000)
 				{
 					g_OpenScene->ShakeCamera(0.5, 5);
+					gameObject->velocity.x *= -0.8f;
 				}
-				gameObject->position.x = var->position.x - gameObject->velocity.x / abs(gameObject->velocity.x) * (gameObject->rigidboydScale.x * 0.5 + var->rigidboydScale.x * 0.5);
-				gameObject->velocity.x *= -0.8;
-			}
+				else
+					gameObject->velocity.x = 0;
 
+				int sign = gameObject->position.x > 0 ? 1 : -1;
+				gameObject->position.x = var->position.x - sign * (gameObject->rigidboydScale.x * 0.5f + var->rigidboydScale.x * 0.5f);
+
+				/*gameObject->position.x = var->position.x - gameObject->velocity.x / abs(gameObject->velocity.x) * (gameObject->rigidboydScale.x * 0.5 + var->rigidboydScale.x * 0.5);
+				gameObject->velocity.x *= -0.8;*/
+			}
 			// 콜라이더 충돌
-			if (gameObject->type == CL_PLAYER && var->type == CL_ENEMY)
+			else if (gameObject->type == PLAYER && var->type == ENEMY)
 			{
 				float speed = D3DXVec2Length(&gameObject->velocity);
-				if (speed != 0 && gameObject->bGround)
-					var->position.x = gameObject->position.x + (var->position.x - gameObject->position.x) / abs(var->position.x - gameObject->position.x) * (var->rigidboydScale.x * 0.5 + gameObject->rigidboydScale.x * 0.5);
-			}
+				int sign = var->position.x > gameObject->fixedPos.x ? 1 : -1;
 
-			if (gameObject->type == CL_ENEMY && var->type == CL_PLAYER)
+				if (speed != 0)
+				{
+					if (gameObject->bPhysics)
+					{
+						var->position.x = gameObject->position.x + sign * (var->rigidboydScale.x * 0.5f + gameObject->rigidboydScale.x * 0.5);
+						var->force.x += gameObject->velocity.x * 0.1f;
+						gameObject->force.x -= gameObject->velocity.x * 0.1f;
+					}
+				}
+				/*if (speed != 0 && gameObject->bGround)
+					var->position.x = gameObject->position.x + (var->position.x - gameObject->position.x) / abs(var->position.x - gameObject->position.x) * (var->rigidboydScale.x * 0.5 + gameObject->rigidboydScale.x * 0.5);*/
+			}
+			else if (gameObject->type == ENEMY && var->type == PLAYER)
 			{
-				float speed = D3DXVec2Length(&gameObject->velocity);
+				int sign = var->fixedPos.x > gameObject->position.x ? 1 : -1;
+				{
+					if (gameObject->bPhysics)
+					{
+						var->position.x = gameObject->position.x + sign * (var->rigidboydScale.x * 0.5 + gameObject->rigidboydScale.x * 0.5);
+						gameObject->force.x -= gameObject->velocity.x * 0.1;
+						var->force.x += gameObject->velocity.x * 0.1;
+					}
+				}
+
+				/*float speed = D3DXVec2Length(&gameObject->velocity);
 				if (speed != 0 && gameObject->bGround)
-					var->position.x = gameObject->position.x + (var->position.x - gameObject->position.x) / abs(var->position.x - gameObject->position.x) * (var->rigidboydScale.x * 0.5 + gameObject->rigidboydScale.x * 0.5);
+					var->position.x = gameObject->position.x + (var->position.x - gameObject->position.x) / abs(var->position.x - gameObject->position.x) * (var->rigidboydScale.x * 0.5 + gameObject->rigidboydScale.x * 0.5);*/
 			}
 		}
 	}

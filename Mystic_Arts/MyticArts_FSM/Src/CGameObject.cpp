@@ -52,6 +52,26 @@ void CGameObject::Update(float deltaTime)
 		Start();
 	}
 
+	if (bRigidbody)
+	{
+		// 현재 힘에 따른 물리적 위치 이동
+		if (!bGround)
+			force.y -= gravity * 200 * mass * deltaTime;
+		velocity += force * 1 / mass * 10;
+		force = { 0,0 };
+		fixedPos = position;
+		position += velocity * deltaTime;
+		
+		bGround = g_OpenScene->m_CollisionManager.RigidbodyCollision(this);
+
+		if (abs(velocity.x) >= 100)
+			velocity.x -= (bGround ? 100 : 10) * velocity.x / abs(velocity.x) * min(abs(velocity.x), 100) * deltaTime;
+		else
+			velocity.x = 0;
+
+		// 플랫폼과 충돌했는지 검사
+	}
+
 	D3DXVECTOR2 vCenter;
 	if (renderer)
 		vCenter = { renderer->GetTextureInfo().Width * pivot.x, renderer->GetTextureInfo().Height * (1 - pivot.y) };
@@ -77,28 +97,6 @@ void CGameObject::Update(float deltaTime)
 
 	if (checkLayers)
 		g_OpenScene->m_CollisionManager.Collision(this);
-
-	if (bRigidbody)
-	{
-		// 현재 힘에 따른 물리적 위치 이동
-		if(!bGround)
-			force.y -= gravity * 200 * mass * deltaTime;
-		velocity += force * 1 / mass * 10;
-		force = { 0,0 };
-		fixedPos = position;
-		position += velocity * deltaTime;
-
-		if (abs(velocity.x) >= 100)
-			velocity.x -= (bGround ? 100 : 10) * velocity.x / abs(velocity.x) * min(abs(velocity.x), 100) * deltaTime;
-		else
-			velocity.x = 0;
-
-		if (position.x < g_OpenScene->limitrect.left + 20 || position.x >g_OpenScene->limitrect.right - 20)
-			position.x = fixedPos.x;
-
-		// 플랫폼과 충돌했는지 검사
-		bGround = g_OpenScene->m_CollisionManager.RigidbodyCollision(this);
-	}
 }
 
 void CGameObject::Render()
@@ -162,6 +160,7 @@ void CGameObject::CreateRigidBody(D3DXVECTOR2 offset, D3DXVECTOR2 scale)
 {
 	gravity = 1;
 	bRigidbody = true;
+	bPhysics = true;
 
 	rigidboydOffset = offset;
 	rigidboydScale = scale;

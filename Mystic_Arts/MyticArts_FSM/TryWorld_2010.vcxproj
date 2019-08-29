@@ -386,8 +386,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CEnemyAttackCollidedr.cpp" />
+    <ClCompile Include="CEnemyAttackEffect.cpp" />
     <ClCompile Include="CGolem.cpp" />
     <ClCompile Include="CHeroAttackCollider.cpp" />
+    <ClCompile Include="CHeroAttackEffect.cpp" />
     <ClCompile Include="CPlatformCheck.cpp" />
     <ClCompile Include="CPlayerCheck.cpp" />
     <ClCompile Include="CScarecrow.cpp" />
@@ -395,9 +397,11 @@
     <ClCompile Include="HeroState.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClInclude Include="CEnemyAttackCollider.h" />
+    <ClInclude Include="CEnemyAttackEffect.h" />
     <ClInclude Include="CGolem.h" />
     <ClInclude Include="CHero.h" />
     <ClInclude Include="CHeroAttackCollider.h" />
+    <ClInclude Include="CHeroAttackEffect.h" />
     <ClInclude Include="CPlatformCheck.h" />
     <ClInclude Include="CPlayerCheck.h" />
     <ClInclude Include="CScarecrow.h" />

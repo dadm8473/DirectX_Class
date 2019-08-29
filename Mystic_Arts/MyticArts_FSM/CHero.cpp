@@ -22,6 +22,8 @@ CHero::~CHero()
 
 void CHero::Start()
 {
+	type = PLAYER;
+
 	if (!renderer)
 		renderer = new CSpriteRenderer(L"Hero", L"Assets/Images/Player/Hero_", L"png", true, 25, 82, 0.06);
 
@@ -124,7 +126,7 @@ bool CHero::Move(float deltaTime)
 	D3DXVec2Normalize(&vMove, &vMove);
 
 	prevPos = position;
-	position += vMove * moveSpeed * deltaTime;
+	velocity.x = vMove.x * moveSpeed;
 
 	if (position.x < g_OpenScene->limitrect.left + 20 || position.x >g_OpenScene->limitrect.right - 20)
 		position.x = prevPos.x;

@@ -27,6 +27,7 @@ public:
 
 	// 물리구현을 위한 변수
 	bool bRigidbody = false;
+	bool bPhysics = false;
 	bool bGround = false;
 	D3DXVECTOR2 rigidboydOffset;
 	D3DXVECTOR2 rigidboydScale;

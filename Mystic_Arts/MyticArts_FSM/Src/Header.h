@@ -5,6 +5,10 @@ enum OBJECT_TYPE
 	PLATFORM,
 	WALL,
 	GAMEOBJECT,
+	PLAYER,
+	ENEMY,
+	PLAYEREFFECT,
+	ENEMYEFFECT,
 	HUD,
 	UIOBJECT,
 };
@@ -58,10 +62,12 @@ extern Scene * g_OpenScene;
 #include "CPlayerCheck.h"
 
 #include "CState.h"
+#include "CHeroAttackEffect.h"
 #include "CHeroAttackCollider.h"
 #include "HeroState.h"
 #include "CHero.h"
 
+#include "CEnemyAttackEffect.h"
 #include "CEnemyAttackCollider.h"
 #include "GolemState.h"
 #include "CGolem.h"

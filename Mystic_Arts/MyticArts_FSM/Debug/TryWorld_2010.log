@@ -1,22 +1,6 @@
-﻿  CollisionManager.cpp
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(48): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(47): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(46): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(45): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(56): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(55): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(54): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(53): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(91): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(90): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(89): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(88): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(99): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(98): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(97): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(96): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(109): warning C4244: '=': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(121): warning C4244: '=': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(130): warning C4244: '=': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\collisionmanager.cpp(137): warning C4244: '=': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  CEnemyAttackCollidedr.cpp
+d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\cenemyattackcollidedr.cpp(40): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\cenemyattackcollidedr.cpp(53): warning C4244: '+=': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GolemState.cpp
+  코드를 생성하고 있습니다...
   TryWorld_2010.vcxproj -> D:\GitHub\DirectX 강의\DirectX_Class\Mystic_Arts\MyticArts_FSM\Debug\TryWorld.exe

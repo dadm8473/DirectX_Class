@@ -43,10 +43,10 @@ int TitleScene::Start()
 	Platformtemp->platformScale = { 300, 60 };
 
 	Wall * wall = new Wall;
-	wall->position = {-g_Game.windowWidth * 0.5f + 100, 0 };
+	wall->position = {-g_Game.windowWidth * 0.5f, 0 };
 	
 	wall = new Wall;
-	wall->position = { g_Game.windowWidth * 0.5f - 100, 0 };
+	wall->position = { g_Game.windowWidth * 0.5f, 0 };
 
 	return 0;
 }
@@ -77,6 +77,11 @@ int TitleScene::Render()
 	memset(buffer, 0, sizeof(buffer));
 	_stprintf_s(buffer, _T("x : %.2lf , y : %2lf"), g_Game.mouse->position.x, g_Game.mouse->position.y); 
 	::SetRect(&rc, 0, 0, 500, 100);
+	g_Game.m_pDXFont->DrawText(NULL, buffer, -1, &rc, 0, D3DXCOLOR(1, 1, 1, 1));
+
+
+	_stprintf_s(buffer, _T("FPS : %.2lf , dTime : %lf"), DXUTGetFPS(), g_Game.unscaleTime);
+	::SetRect(&rc, 0, 100, 500, 200);
 	g_Game.m_pDXFont->DrawText(NULL, buffer, -1, &rc, 0, D3DXCOLOR(1, 1, 1, 1));
 
 	InvalidateRgn(DXUTGetHWND(), NULL, false);

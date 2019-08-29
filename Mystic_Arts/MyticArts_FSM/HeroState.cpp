@@ -259,8 +259,10 @@ void HeroAttack::EnterState(CHero * pObject)
 	pObject->renderer->SetAni(7);
 	pObject->heroAttackCollider->bCollision = true;
 	pObject->heroAttackCollider->collisionNum++;
-	pObject->heroAttackCollider->attackVector = { 1,0 };
-	pObject->heroAttackCollider->attackPower = 300;
+	pObject->heroAttackCollider->attackVector = { 1,0.5f };
+	pObject->heroAttackCollider->attackPower = 200;
+	pObject->heroAttackCollider->effectPos = { 10, 40 };
+	pObject->bPhysics = false;
 
 	combo = 0;
 	comboInput = 0;
@@ -331,6 +333,7 @@ void HeroAttack::ExitState(CHero * pObject)
 	pObject->moveSpeed = 300;
 	pObject->bFlip = true;
 	pObject->heroAttackCollider->bCollision = false;
+	pObject->bPhysics = true;
 }
 
 // ============================================================================================================================================
@@ -359,6 +362,8 @@ void HeroSkyAttack::EnterState(CHero * pObject)
 	pObject->heroAttackCollider->collisionNum++;
 	pObject->heroAttackCollider->attackVector = { 0.1,0.5 };
 	pObject->heroAttackCollider->attackPower = 200;
+	pObject->heroAttackCollider->effectPos = { 15,40 };
+	pObject->bPhysics = false;
 
 	pObject->gravity = 0.1;
 	pObject->velocity.y = 0;
@@ -427,6 +432,7 @@ void HeroSkyAttack::ExitState(CHero * pObject)
 	pObject->bFlip = true;
 	pObject->gravity = 1;
 	pObject->heroAttackCollider->bCollision = false;
+	pObject->bPhysics = true;
 }
 
 
@@ -494,14 +500,22 @@ void HeroSpecailAttack::EnterState(CHero * pObject)
 	case 0:
 		pObject->heroAttackCollider->attackVector = { 1,0.2 };
 		pObject->heroAttackCollider->attackPower = 3000;
+		pObject->heroAttackCollider->effectPos = { 25,40 };
+		break;
+	case 1:
+		pObject->heroAttackCollider->attackVector = { 0.5,1 };
+		pObject->heroAttackCollider->attackPower = 300;
+		pObject->heroAttackCollider->effectPos = { 15,10 };
 		break;
 	case 2:
 		pObject->heroAttackCollider->attackVector = { 0.1,1 };
 		pObject->heroAttackCollider->attackPower = 1000;
+		pObject->heroAttackCollider->effectPos = { 25,50 };
 		break;
 	case 3:
 		pObject->heroAttackCollider->attackVector = { 1, 0.2 };
 		pObject->heroAttackCollider->attackPower = 1500;
+		pObject->heroAttackCollider->effectPos = { 20,30 };
 		break;
 	case 4:
 		pObject->heroAttackCollider->attackVector = { 1,0.6 };
@@ -511,6 +525,7 @@ void HeroSpecailAttack::EnterState(CHero * pObject)
 
 	pObject->renderer->SetAni(10 + pObject->specialIndex);
 	timer = 0;
+	pObject->bPhysics = false;
 }
 
 void HeroSpecailAttack::UpdateState(CHero * pObject, float deltaTime)
@@ -535,6 +550,7 @@ void HeroSpecailAttack::ExitState(CHero * pObject)
 	pObject->moveSpeed = 300;
 	pObject->bFlip = true;
 	pObject->heroAttackCollider->bCollision = false;
+	pObject->bPhysics = true;
 }
 
 // ============================================================================================================================================

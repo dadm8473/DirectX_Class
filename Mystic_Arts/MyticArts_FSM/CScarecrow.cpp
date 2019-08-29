@@ -13,6 +13,8 @@ CScarecrow::~CScarecrow()
 
 void CScarecrow::Start()
 {
+	type = ENEMY;
+
 	if (!renderer)
 		renderer = new CSpriteRenderer(L"Scarecrow", L"Assets/Images/ScareCrow", L"png", false);
 
