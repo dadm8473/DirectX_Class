@@ -393,9 +393,11 @@
     <ClCompile Include="CPlatformCheck.cpp" />
     <ClCompile Include="CPlayerCheck.cpp" />
     <ClCompile Include="CScarecrow.cpp" />
+    <ClCompile Include="CWolf.cpp" />
     <ClCompile Include="GolemState.cpp" />
     <ClCompile Include="HeroState.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="WolfState.cpp" />
     <ClInclude Include="CEnemyAttackCollider.h" />
     <ClInclude Include="CEnemyAttackEffect.h" />
     <ClInclude Include="CGolem.h" />
@@ -406,6 +408,7 @@
     <ClInclude Include="CPlayerCheck.h" />
     <ClInclude Include="CScarecrow.h" />
     <ClInclude Include="CState.h" />
+    <ClInclude Include="CWolf.h" />
     <ClInclude Include="GolemState.h" />
     <ClInclude Include="HeroState.h" />
     <ClInclude Include="Platform.h" />
@@ -419,6 +422,7 @@
     <ClInclude Include="Src\Scene.h" />
     <ClInclude Include="Src\TitleScene.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="WolfState.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="Src\CInput.h" />
     <ClInclude Include="Src\CollisionManager.h" />

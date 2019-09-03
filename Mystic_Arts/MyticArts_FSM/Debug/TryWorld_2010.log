@@ -1,6 +1,7 @@
-﻿  CEnemyAttackCollidedr.cpp
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\cenemyattackcollidedr.cpp(40): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\cenemyattackcollidedr.cpp(53): warning C4244: '+=': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GolemState.cpp
+﻿  CWolf.cpp
+  TitleScene.cpp
+d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\titlescene.cpp(20): warning C4189: 'temp2': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+d:\github\directx 강의\directx_class\mystic_arts\myticarts_fsm\src\titlescene.cpp(18): warning C4189: 'temp': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+  WolfState.cpp
   코드를 생성하고 있습니다...
   TryWorld_2010.vcxproj -> D:\GitHub\DirectX 강의\DirectX_Class\Mystic_Arts\MyticArts_FSM\Debug\TryWorld.exe

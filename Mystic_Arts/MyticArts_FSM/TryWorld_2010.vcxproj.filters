@@ -48,6 +48,12 @@
     <Filter Include="GameObject\Effect">
       <UniqueIdentifier>{b301a779-1823-44ac-9df8-6ceed53e910c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Enemy\Scarecrow">
+      <UniqueIdentifier>{4b190649-19d4-4e78-bc1b-7fbbdecb5da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Enemy\Wolf">
+      <UniqueIdentifier>{921081b1-6c08-4545-8a3f-4cfbe1928130}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -159,7 +165,6 @@
     <ClCompile Include="CHeroAttackCollider.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="CScarecrow.cpp" />
     <ClCompile Include="CGolem.cpp">
       <Filter>GameObject\Enemy\Golem</Filter>
     </ClCompile>
@@ -189,6 +194,15 @@
     </ClCompile>
     <ClCompile Include="CEnemyAttackEffect.cpp">
       <Filter>GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CScarecrow.cpp">
+      <Filter>GameObject\Enemy\Scarecrow</Filter>
+    </ClCompile>
+    <ClCompile Include="CWolf.cpp">
+      <Filter>GameObject\Enemy\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="WolfState.cpp">
+      <Filter>GameObject\Enemy\Wolf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -243,7 +257,6 @@
     <ClInclude Include="CHeroAttackCollider.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="CScarecrow.h" />
     <ClInclude Include="CGolem.h">
       <Filter>GameObject\Enemy\Golem</Filter>
     </ClInclude>
@@ -273,6 +286,15 @@
     </ClInclude>
     <ClInclude Include="CEnemyAttackEffect.h">
       <Filter>GameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CScarecrow.h">
+      <Filter>GameObject\Enemy\Scarecrow</Filter>
+    </ClInclude>
+    <ClInclude Include="CWolf.h">
+      <Filter>GameObject\Enemy\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="WolfState.h">
+      <Filter>GameObject\Enemy\Wolf</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

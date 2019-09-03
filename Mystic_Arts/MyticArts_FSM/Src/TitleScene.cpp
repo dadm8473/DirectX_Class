@@ -22,6 +22,9 @@ int TitleScene::Start()
 	CGolem * temp3 = new CGolem;
 	temp3->position = { 100, 0 };
 
+	CWolf * temp4 = new CWolf;
+	temp4->position = { 0, -200 };
+
 	Platform * Platformtemp = new Platform;
 	Platformtemp->position = { 0,-320 };
 	Platformtemp->platformScale = { 1024, 60 };

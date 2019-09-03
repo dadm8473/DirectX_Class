@@ -2,7 +2,7 @@
 class Game
 {
 public:
-	MousePoint * mouse = NULL; //¡Ú¡Ú¡Ú
+	MousePoint * mouse = NULL;
 
 	ResourceManager m_ResourceManager;
 	CInput Input;
@@ -29,4 +29,3 @@ public:
 
 	int Destroy();
 };
-

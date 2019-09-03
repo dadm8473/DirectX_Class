@@ -21,7 +21,7 @@ int Scene::Start()
 	g_Game.mouse = new MousePoint; //¡Ú¡Ú¡Ú
 	ObjectManager::Start(); 
 	return 0;
-}
+}                              
 
 int Scene::Destroy()
 {

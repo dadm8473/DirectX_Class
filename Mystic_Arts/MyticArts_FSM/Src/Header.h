@@ -71,5 +71,7 @@ extern Scene * g_OpenScene;
 #include "CEnemyAttackCollider.h"
 #include "GolemState.h"
 #include "CGolem.h"
+#include "WolfState.h"
+#include "CWolf.h"
 
 #include "CScarecrow.h"
