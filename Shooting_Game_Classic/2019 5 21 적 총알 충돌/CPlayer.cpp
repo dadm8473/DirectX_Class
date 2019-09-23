@@ -22,7 +22,7 @@ void CPlayer::Update(float deltatime)
 			attackTimer = 0;
 
 			// 부모 씬 플레이어 총알 리스트 push back
-			parentScene->playerBulletList.push_back(new CBullet(position, 1024, 0));
+			parentScene->playerBulletList.push_back(new CBullet(position, 100, 0));
 
 			isAttacking = false;
 		}

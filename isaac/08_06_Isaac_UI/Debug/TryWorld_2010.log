@@ -1,9 +1,161 @@
-﻿  Boss3.cpp
-d:\github\directx 강의\directx_class\08_06_isaac_room\boss3.cpp(64): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\08_06_isaac_room\boss3.cpp(65): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\08_06_isaac_room\boss3.cpp(186): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\08_06_isaac_room\boss3.cpp(187): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\08_06_isaac_room\boss3.cpp(191): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\08_06_isaac_room\boss3.cpp(216): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\directx 강의\directx_class\08_06_isaac_room\boss3.cpp(216): warning C4238: 비표준 확장이 사용됨: 클래스 rvalue를 lvalue로 사용했습니다.
-  TryWorld_2010.vcxproj -> D:\GitHub\DirectX 강의\DirectX_Class\08_06_Isaac_Room\Debug\TryWorld.exe
+﻿  DXUT.cpp
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54723): note: 'DXGI_STATUS_OCCLUDED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54732): note: 'DXGI_STATUS_CLIPPED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54741): note: 'DXGI_STATUS_NO_REDIRECTION'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54750): note: 'DXGI_STATUS_NO_DESKTOP_ACCESS'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54759): note: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54768): note: 'DXGI_STATUS_MODE_CHANGED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54777): note: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54792): note: 'DXGI_ERROR_INVALID_CALL'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54801): note: 'DXGI_ERROR_NOT_FOUND'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54810): note: 'DXGI_ERROR_MORE_DATA'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54819): note: 'DXGI_ERROR_UNSUPPORTED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54828): note: 'DXGI_ERROR_DEVICE_REMOVED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54837): note: 'DXGI_ERROR_DEVICE_HUNG'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54847): note: 'DXGI_ERROR_DEVICE_RESET'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54856): note: 'DXGI_ERROR_WAS_STILL_DRAWING'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54866): note: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54875): note: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54885): note: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54894): note: 'DXGI_ERROR_NONEXCLUSIVE'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54903): note: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54913): note: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54922): note: 'DXGI_ERROR_REMOTE_OUTOFMEMORY'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(55162): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(55171): note: 'D3D10_ERROR_FILE_NOT_FOUND'의 이전 정의를 참조하십시오.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\core\dxut.cpp(696): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\core\dxut.cpp(697): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\core\dxut.cpp(4961): warning C4996: 'GetVersionExW': deprecated로 선언되었습니다.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\um\sysinfoapi.h(387): note: 'GetVersionExW' 선언을 참조하십시오.
+  BackButton.cpp
+  Boss3.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\boss3.cpp(64): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\boss3.cpp(65): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\boss3.cpp(186): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\boss3.cpp(187): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\boss3.cpp(191): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\boss3.cpp(216): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\boss3.cpp(216): warning C4238: 비표준 확장이 사용됨: 클래스 rvalue를 lvalue로 사용했습니다.
+  CItem.cpp
+  Door.cpp
+  Ending.cpp
+  EndingScene.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\endingscene.cpp(18): warning C4189: 'ending': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+  MousePoint.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\mousepoint.cpp(17): error C2065: 'CL_MOUSE': 선언되지 않은 식별자입니다.
+  Room.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\room.cpp(124): warning C4838: 'FLOAT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\room.cpp(124): warning C4244: '초기화 중': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Boss2.cpp
+  ChaseBall.cpp
+  EnemyHall.cpp
+  Boss1.cpp
+  ChaseEnemy.cpp
+  HPBar.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\hpbar.cpp(21): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Isaac.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\isaac.cpp(100): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: 'sprintf' 선언을 참조하십시오.
+  IsaacHead.cpp
+  Numeric.cpp
+  PlayerBullet.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\playerbullet.cpp(22): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ScoreBoard.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(20): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(24): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(25): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(29): warning C4244: '-=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(32): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(36): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(37): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(41): warning C4244: '-=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(24): warning C4189: 'test': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scoreboard.cpp(36): warning C4189: 'test': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+  BulletSpawner.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(26): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(31): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(37): warning C4456: 'temp' 선언은 이전 로컬 선언을 숨깁니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(23): note: 'temp' 선언을 참조하십시오.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(38): warning C4456: 'x' 선언은 이전 로컬 선언을 숨깁니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(24): note: 'x' 선언을 참조하십시오.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(39): warning C4456: 'y' 선언은 이전 로컬 선언을 숨깁니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(25): note: 'y' 선언을 참조하십시오.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\bulletspawner.cpp(40): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  ChaseBullet.cpp
+  CInput.cpp
+  CollisionManager.cpp
+  CGameObject.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\cgameobject.cpp(115): warning C4458: 'layer' 선언은 클래스 멤버를 숨깁니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\cgameobject.h(18): note: 'CGameObject::layer' 선언을 참조하십시오.
+  CPlayer.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\cplayer.cpp(80): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: 'sprintf' 선언을 참조하십시오.
+  CTexture.cpp
+  CSpriteRenderer.cpp
+  DXUTenum.cpp
+  DXUTmisc.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\core\dxutmisc.cpp(1263): warning C4996: 'GetVersionExA': deprecated로 선언되었습니다.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\um\sysinfoapi.h(378): note: 'GetVersionExA' 선언을 참조하십시오.
+  DXUTcamera.cpp
+  DXUTgui.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\optional\dxutgui.cpp(6846): warning C4458: 'iTexture' 선언은 클래스 멤버를 숨깁니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\optional\dxutgui.h(109): note: 'CDXUTElement::iTexture' 선언을 참조하십시오.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\optional\dxutgui.cpp(6860): warning C4458: 'iFont' 선언은 클래스 멤버를 숨깁니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\optional\dxutgui.h(110): note: 'CDXUTElement::iFont' 선언을 참조하십시오.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\optional\dxutgui.cpp(6860): warning C4458: 'dwTextFormat' 선언은 클래스 멤버를 숨깁니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\dxut\optional\dxutgui.h(111): note: 'CDXUTElement::dwTextFormat' 선언을 참조하십시오.
+  DXUTres.cpp
+  DXUTsettingsdlg.cpp
+  SDKmesh.cpp
+  SDKmisc.cpp
+  EnemyBullet.cpp
+  Game.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\game.cpp(28): warning C4244: '=': 'const UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\game.cpp(29): warning C4244: '=': 'const UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  InGameScene.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\ingamescene.cpp(20): warning C4189: 'scoreboard': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\ingamescene.cpp(104): warning C4473: 'swprintf_s': 서식 문자열에 대한 인수가 충분하게 전달되지 않았습니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\ingamescene.cpp(104): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 2개 필요하지만 1개가 제공되었습니다.
+  d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\ingamescene.cpp(104): note: 누락된 variadic 인수 2이(가) 서식 문자열 '%lf'에 필요합니다.
+  ObjectManager.cpp
+  ResourceManager.cpp
+  코드를 생성하고 있습니다...
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\cplayer.cpp(143): warning C4706: 조건식 내에 할당이 있습니다.
+  컴파일하고 있습니다...
+  Scene.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scene.cpp(59): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\scene.cpp(60): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Title.cpp
+  TitleScene.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\src\titlescene.cpp(18): warning C4189: 'title': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+  StartButton.cpp
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\startbutton.cpp(19): error C2065: 'CL_UI': 선언되지 않은 식별자입니다.
+d:\github\directx 강의\directx_class\isaac\08_06_isaac_ui\startbutton.cpp(20): error C2065: 'CL_MOUSE': 선언되지 않은 식별자입니다.
+  TryWorld.cpp
+  코드를 생성하고 있습니다...
